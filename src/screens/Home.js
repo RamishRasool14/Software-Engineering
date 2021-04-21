@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
 
 
 })
-const image = { uri: "https://reactjs.org/logo-og.png" };
 
 export default class Home extends React.Component {
 
