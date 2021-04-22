@@ -115,14 +115,7 @@ export default class Home extends React.Component {
                 <View style = {{flexDirection:'row'}}>
 
               <Text style = {{fontSize : 28, color: "white" , marginTop: 50,  marginLeft:20}}> Robert Williamson</Text> 
-              <TouchableOpacity>
-                <View>
-                <ImageBackground source={image} style={styles.ProfileIcon}>
-                </ImageBackground>
-
-                </View>
-
-              </TouchableOpacity>
+              
 
                 </View>
             <Text style = {{fontSize : 18,color: "white", marginLeft:27, marginTop: 10}}>We're glad that you are here!</Text>
