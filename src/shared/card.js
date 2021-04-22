@@ -27,22 +27,22 @@ card : {
     width: 80,
 
 
-    shadowColor: "#fff",
+    shadowColor: "#ffff",
     shadowOffset: {
-      width: 0,
-      height: 10,
+      width: 20,
+      height: 20,
     },
-    shadowOpacity: 0.12,
-    shadowRadius: 60,
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
 
 
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     marginLeft: 32,
-    borderWidth: 0.5,
-    borderColor: 'black',
+    // borderWidth: 0.5,
+    // borderColor: 'black',
 
 
-elevation: 5,
+elevation: 2
 
 
 },

@@ -112,24 +112,37 @@ export default class Home extends React.Component {
     this.state = {
       isFontLoaded : false,
       username : '' ,
-    }
+      ProfileP: null,
+      data : {}
+
+    };
+
+
   }
-  getName (){
+  SetScreen (){
     firebase
       .database()
-      .ref("/usernames")
+      .ref("/usernames/user1")
       .on("value", snapshot => {
-        const name = snapshot.val().user1
-        this.setState({
+        const name = snapshot.val().name
+        const Profile = snapshot.val().PP
+        this.setState(prevstate => ({
           username:name,
-        })
+          ProfileP: Profile,
+          data : {
+            ...prevstate.data,
+            ClientName : name
+          }
   
-      })
-  }
+        })
+        )})
+
+}
 componentDidMount () {
-  this.getName()
+  this.SetScreen()
  
 }
+
 
     render(){
 
@@ -137,14 +150,26 @@ componentDidMount () {
           <View style = {{backgroundColor: 'white'}}>
               <View style = {styles.image}>   
 
+              
+
                 <View style = {{flexDirection:'row'}}>
 
-              <Text style = {{fontSize : 28, color: "white" , marginTop: 50,  marginLeft:20}}>{this.state.username}</Text> 
-              
+            
+              <Text style = {{fontSize : 28, color: "white" , marginTop: 50,  marginLeft:20}}>{this.state.username} {'\n'}  <Text style = {{fontSize : 18,color: "white", marginLeft:27, marginTop: 0}}>We're glad that you are here!</Text></Text> 
+              <TouchableOpacity onPress = {() => this.props.navigation.navigate('ViewClientProfile', this.state.data)}>
+             
+              <Image
+                    
+                    source = {{uri : this.state.ProfileP}}
+                    style = {{width: 65, height: 65, marginTop: 55, marginLeft: 45, borderRadius: 2,
+                    
+                  }}
+              />
+              </TouchableOpacity>
+
               
 
                 </View>
-            <Text style = {{fontSize : 18,color: "white", marginLeft:27, marginTop: 10}}>We're glad that you are here!</Text>
 
                       
               <View style = {styles.container}>
@@ -225,7 +250,7 @@ componentDidMount () {
 
                 <View>                
                   
-                  <TouchableOpacity onPress = {() => this.props.navigation.navigate('Detail')}>
+                  <TouchableOpacity onPress = {() => this.props.navigation.navigate('Detail', this.state.data)}>
 
                   <Button />
                 </TouchableOpacity>

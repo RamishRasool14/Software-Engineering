@@ -94,10 +94,14 @@ const styles = StyleSheet.create({
 })
 
 export default class Home extends React.Component {
+  constructor(props){
+    super(props);
+  }
 
   state = {
     isFontLoaded : false
   }
+  
     render(){
 
         return (
@@ -120,7 +124,8 @@ export default class Home extends React.Component {
                 <View style = {{marginLeft: 10, marginTop: 12}}>
                 <Feather  name = 'search' size = {22} color = '#2E305F'/>
                 </View>
-                <TextInput placeholder = 'Search Categories.. ' style = {styles.searchInput}/> 
+                <TextInput placeholder = "Search Categories.."
+ style = {styles.searchInput}/> 
                 
 
                 </View>
@@ -129,7 +134,7 @@ export default class Home extends React.Component {
 
                 <View style = {{flexDirection:'row'}}>
 
-                <TouchableOpacity onPress = {() => this.props.navigation.navigate('CompletedOrders')}>
+                <TouchableOpacity id = 'Gardener' onPress = {() => this.props.navigation.navigate('CompletedOrders')}>
 
                     <Cardl>
                   <Image source={Gardener} alt="Logo" style = {{width: 100, height : 110, paddingLeft: 70}} />
@@ -138,7 +143,7 @@ export default class Home extends React.Component {
 
 
 
-                  <TouchableOpacity onPress = {() => this.props.navigation.navigate('CompletedOrders')}>
+                  <TouchableOpacity id = 'Electrician'  onPress = {() => this.props.navigation.navigate('CompletedOrders')}>
                     <Cardr>
                   <Image source={Electrican} alt="Logo" style = {{width: 80, height :110 , paddingLeft: 70}} />
                     </Cardr>

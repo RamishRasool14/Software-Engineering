@@ -5,6 +5,7 @@ import Home from '../screens/Home';
 import Detail from '../screens/Categories';
 import CompletedOrders from '../screens/Category People List';
 import ViewProfile from '../screens/View Profile';
+import ViewClientProfile from '../screens/ViewClientProfile';
 import Reviews from '../screens/Reviews_List';
 import DetailsOfServiceProvider from '../screens/DetailsSP';
 import {NavigationContainer} from "@react-navigation/native"
@@ -21,6 +22,7 @@ import SPHome from "../screens/Service_Provider_Dashboard";
 import SPCompleted from "../screens/Completed_Orders_List";
 import SPPending from "../screens/Pending_Orders_List";
 import SPReviews from "../screens/Reviews_List";
+
 
 
 const Stack = createStackNavigator()
@@ -76,6 +78,20 @@ return (
             fontWeight: 'bold',
           },
         }} />
+
+        <Stack.Screen name = "ViewClientProfile" component = {ViewClientProfile} options={{
+                  title: 'My Profile',
+                  headerStyle: {
+                    backgroundColor: '#2E305F',
+                  },
+                  headerTintColor: '#fff',
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                }} />
+
+
+
             <Stack.Screen name = "DetailsOfServiceProvider" component = {DetailsOfServiceProvider} options={{
           title: 'Details',
           headerStyle: {
