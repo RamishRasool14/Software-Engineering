@@ -6,14 +6,14 @@ import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import Card from '../shared/card';
 import BigCard from '../shared/BigCard';
 import Button from '../shared/Button';
-import {View, Text, Image,Dimensions ,ImageBackground,TextInput, StyleSheet} from 'react-native';
+import {View, Text, Image,Dimensions ,ImageBackground,TextInput, StyleSheet, SnapshotViewIOSComponent} from 'react-native';
 import Cloud from '../Icons/cloud';
 import History from '../Icons/History';
 import InProcess from '../Icons/InProcess';
 import BigCardSVG from '../Icons/BigCardIcon';
 import Search from '../Icons/search';
 import {Feather} from '@expo/vector-icons'
-
+import firebase from './firebase'
 const styles = StyleSheet.create({
 
 
@@ -101,11 +101,36 @@ const styles = StyleSheet.create({
 
 })
 
+
+
+
 export default class Home extends React.Component {
 
-  state = {
-    isFontLoaded : false
+  constructor(props) {
+    super(props);
+    // Don't call this.setState() here!
+    this.state = {
+      isFontLoaded : false,
+      username : '' ,
+    }
   }
+  getName (){
+    firebase
+      .database()
+      .ref("/usernames")
+      .on("value", snapshot => {
+        const name = snapshot.val().user1
+        this.setState({
+          username:name,
+        })
+  
+      })
+  }
+componentDidMount () {
+  this.getName()
+ 
+}
+
     render(){
 
         return (
@@ -114,7 +139,8 @@ export default class Home extends React.Component {
 
                 <View style = {{flexDirection:'row'}}>
 
-              <Text style = {{fontSize : 28, color: "white" , marginTop: 50,  marginLeft:20}}> Robert Williamson</Text> 
+              <Text style = {{fontSize : 28, color: "white" , marginTop: 50,  marginLeft:20}}>{this.state.username}</Text> 
+              
               
 
                 </View>
