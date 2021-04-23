@@ -16,7 +16,7 @@ import "firebase/firestore";
 
 import firebase from "./firebase";
 export default class ClientSignup extends Component {
-    
+      
 constructor(props) {
     super(props);
     this.state = {
@@ -43,30 +43,11 @@ myfun(){
           .auth()
           .createUserWithEmailAndPassword(this.state.email, this.state.password)
           .then((response) => {
-              const uid = response.user.uid
-              const data = {
-                  id: uid,
-                  email: this.state.email,
-                  fullName: this.state.username,
-              };
-              firebase
-                  .firestore()
-                  .collection('users')
-                  .doc(uid)
-                  .set(data)
-                  .then(() => {
-                    this.props.navigation.navigate('ClientLogin')
-                  })
-                  .catch((error) => {
-                      alert(error)
-                  });
+            this.props.navigation.navigate('ClientLogin')
           })
           .catch((error) => {
               alert(error)
       });
-
-
-      this.props.navigation.navigate('ClientLogin')
 
 }
 

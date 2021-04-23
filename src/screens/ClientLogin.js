@@ -24,28 +24,12 @@ export default class ClientLogin extends Component {
   }
   actionsfun()
   {
-    console.log(this.state.email)
-    console.log(this.state.password)
     firebase
       .auth()
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then((response) => {
-          const uid = response.user.uid
-          const usersRef = firebase.firestore().collection('users')
-          usersRef
-              .doc(uid)
-              .get()
-              .then(firestoreDocument => {
-                  if (!firestoreDocument.exists) {
-                      alert("User does not exist anymore.")
-                      return;
-                  }
-                  const user = firestoreDocument.data()
-                  this.props.navigation.navigate('Home')  
-              })
-              .catch(error => {
-                  alert(error)
-              });
+        this.props.navigation.navigate('Home')  
+         
       })
       .catch(error => {
           alert(error)

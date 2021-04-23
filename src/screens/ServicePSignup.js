@@ -8,28 +8,68 @@ import {
   TextInput,
   SafeAreaView,
   ScrollView,
+  Alert
 } from 'react-native';
 import SignupSVG from '../Icons/SignupSVG'
 import {Picker} from '@react-native-community/picker';
+import "firebase/firestore";
 
-// import Logo from '../components/Logo';
+import firebase from "./firebase";
+export default class ClientSignup extends Component {
+      
+constructor(props) {
+    super(props);
+    this.state = {
+      password: "",
+      confirmpassword: "",
+      email: "",
+      city: "",
+      province: "",
+      username: "",
+      colony: "",
+      SQ: "",
+      phonenumber: "",
+      hourlyRate : "",
+      securityanswer: "",
+      workCategory : "",
+
+
+    };
+  }
+
+  processPress (){
+
+    firebase
+      .database()
+      .ref('service_providers')
+      .push()
+      .set(this.state) 
+
+}
+
+myfun(){
+ 
+
+  firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.state.email, this.state.password)
+          .then((response) => {
+            this.processPress()
+            this.props.navigation.navigate('SPLogin')
+          })
+          .catch((error) => {
+              alert(error)
+      });
 
 
 
-export default class ServicePSignup extends Component {
-    
-//   goBack() {
-//       Actions.pop();
-//   }
-//   serviceplogin() {
-//     Actions.serviceplogin();
-// }
-
+}
 
 	render() {
 		return(
       <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
+			
         <View>
         <Text style={styles.textContainer0}>Register With Us!</Text>
         </View>
@@ -38,7 +78,29 @@ export default class ServicePSignup extends Component {
         <TextInput style={styles.inputBox}  
               placeholder="Email Address"
               placeholderTextColor = "rgba(0,0,0,0.4)"
-              ref={(input) => this.emailaddress = input}
+            onChangeText={(value) => this.setState({email: value})}
+              value={this.state.email}
+              
+            
+              />
+              <TextInput style={styles.inputBox} 
+                underlineColorAndroid='rgba(0,0,0,0)' 
+                placeholder="Password"
+                secureTextEntry={true}
+                placeholderTextColor = "rgba(0,0,0,0.4)"
+            //   ref={(input) => this.state.password = input}
+                onChangeText={(value) => this.setState({password: value})}
+                value={this.state.password}
+
+              />
+              <TextInput style={styles.inputBox} 
+                underlineColorAndroid='rgba(0,0,0,0)' 
+                placeholder="Confirm Password"
+                secureTextEntry={true}
+                placeholderTextColor = "rgba(0,0,0,0.4)"
+            //   ref={(input) => this.state.password = input}
+                onChangeText={(value) => this.setState({confirmpassword: value})}
+                value={this.state.confirmpassword}
               />
         <TextInput style={styles.inputBox} 
               underlineColorAndroid='rgba(0,0,0,0)' 
@@ -46,15 +108,11 @@ export default class ServicePSignup extends Component {
               placeholderTextColor = "rgba(0,0,0,0.4)"
               selectionColor="#fff"
               keyboardType="email-address"
-              onSubmitEditing={()=> this.username.focus()}
+              onChangeText={(value) => this.setState({username: value})}
+              value={this.state.username}
+            
               />
-          <TextInput style={styles.inputBox} 
-              underlineColorAndroid='rgba(0,0,0,0)' 
-              placeholder="Password"
-              secureTextEntry={true}
-              placeholderTextColor = "rgba(0,0,0,0.4)"
-              ref={(input) => this.password = input}
-              />
+          
               {/* <Button 
                 onPress = {this.dashboard}
                 title = "Sign Up"
@@ -63,34 +121,112 @@ export default class ServicePSignup extends Component {
               <TextInput style={styles.inputBox}  
               placeholder="Phone Number"
               placeholderTextColor = "rgba(0,0,0,0.4)"
-              ref={(input) => this.phonenumber = input}
+            onChangeText={(value) => this.setState({phonenumber: value})}
+              value={this.state.phonenumber}
               />
+              <TextInput style={styles.inputBox}  
+              placeholder="Hourly Work Rate (PKR)"
+              placeholderTextColor = "rgba(0,0,0,0.4)"
+            onChangeText={(value) => this.setState({hourlyRate: value})}
+              value={this.state.hourlyRate}
+              />
+              <View style = {styles.inputBox6}>
+
+              <Picker style = {styles.picker2}
+              selectedValue={this.state.workCategory}
+
+              onValueChange={(itemValue, itemIndex) => { 
+                if (!itemValue) {
+                return;
+              } 
+                this.setState({ colony: itemValue })}} >
+                  <Picker.Item label="Select Work Category" value="" />
+                  <Picker.Item label="Electrician" value="Electrician" />
+                  <Picker.Item label="Plumber" value="Plumber" />
+                  <Picker.Item label="Labor" value="Labor" />
+                  <Picker.Item label="Mechanic" value="Mechanic" />
+                  <Picker.Item label="Car Washer" value="Car Washer" />
+              </Picker>
+              </View>
               
-              <Text style={{fontSize: 14, color: '#000000',marginLeft: -160}}>Select your location:</Text>
+              <View style = {{flexDirection:'row'}}>
+              <Text style={{fontSize: 14, color: '#000000',marginLeft: -45,marginTop: 20}}>City:</Text>
+              <Text style={{fontSize: 14, color: '#000000',marginLeft: 120,marginTop: 20}}>Province:</Text>
+              </View>
               <View style = {{flexDirection:'row'}}>
               <View style = {styles.inputBox3}>
-              <Picker style = {styles.picker}>
-                  <Picker.Item label="Lahore" vlaue="Lahore" />
+              <Picker style = {styles.picker}
+              selectedValue={this.state.colony}
+
+              onValueChange={(itemValue, itemIndex) => { 
+                if (!itemValue) {
+                return;
+              } 
+                this.setState({ city: itemValue })}}>
+                  <Picker.Item label="Select a city..." value="" />
+                  <Picker.Item label="Lahore" value="Lahore" />
               </Picker>
               </View>
               {/* <Text style={{fontSize: 14, color: '#000000',marginLeft: -130}}>Select your province:</Text> */}
         
               <View style = {styles.inputBox4}>
-              <Picker style = {styles.picker}>
-                  <Picker.Item label="Punjab" vlaue="Punjab" />
+              <Picker style = {styles.picker}
+              selectedValue={this.state.colony}
+
+              onValueChange={(itemValue, itemIndex) => { 
+                if (!itemValue) {
+                return;
+              } 
+                this.setState({ province: itemValue })}}
+               >
+                 <Picker.Item label="Select a province..." value="" />
+                  <Picker.Item label="Punjab" value="Punjab" />
               </Picker>
               </View>
               </View>
-              <Text style={{fontSize: 14, color: '#000000',marginLeft: -165}}>Select your society:</Text>
-              
+              <Text style={{fontSize: 14, color: '#000000',marginLeft: -200,marginTop: 20}}>Society:</Text>
               <View style = {styles.inputBox5}>
-              <Picker style = {styles.picker1}>
-                  <Picker.Item label="Defence" vlaue="Defence" />
-                  <Picker.Item label="Bahria Town" vlaue="Bahria Town" />
-                  <Picker.Item label="Wapda Town" vlaue="Wapda Town" />
-                  <Picker.Item label="Defence Colony" vlaue="Cantt" />
+              <Picker style = {styles.picker1}
+              selectedValue={this.state.colony}
+
+              onValueChange={(itemValue, itemIndex) => { 
+                if (!itemValue) {
+                return;
+              } 
+                this.setState({ colony: itemValue })}} >
+                  <Picker.Item label="Select a society..." value="" />
+                  <Picker.Item label="Defence" value="Defence" />
+                  <Picker.Item label="Bahria Town" value="Bahria Town" />
+                  <Picker.Item label="Wapda Town" value="Wapda Town" />
+                  <Picker.Item label="Defence Colony" value="Cantt" />
               </Picker>
               </View>
+
+
+              <Text style={{fontSize: 14, color: '#000000',marginLeft: -140,marginTop: 20}}>Security question:</Text>
+              
+
+
+              <View style = {styles.inputBox6}>
+              <Picker style = {styles.picker2}
+              selectedValue={this.state.colony}
+
+              onValueChange={(itemValue, itemIndex) => { 
+                if (!itemValue) {
+                return;
+              } 
+                this.setState({ SQ: itemValue })}}>
+                  <Picker.Item label="Select a Security Question..." value="" />
+                  <Picker.Item label=" Your nick name?" value="Your nick name?" />
+                  <Picker.Item label="Your pet's name?" value="Your pet's name?" />
+              </Picker>
+              </View>
+              <TextInput style={styles.inputBox}  
+              placeholder="Your Answer"
+              placeholderTextColor = "rgba(0,0,0,0.4)"
+              onChangeText={(value) => this.setState({securityanswer: value})}
+              value={this.state.securityanswer}
+              />
               
               
 
@@ -99,13 +235,13 @@ export default class ServicePSignup extends Component {
               
               
             <TouchableOpacity style={styles.button}
-            onPress={this.serviceplogin}>
+            onPress = {this.myfun.bind(this)}>
              <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
           </View>
 				<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Already have an account?</Text>
-					<TouchableOpacity onPress={()=> this.props.navigation.navigate('SPLogin')}><Text style={styles.signupButton}> Sign in</Text></TouchableOpacity>
+					<TouchableOpacity onPress={this.goBack}><Text style={styles.signupButton}> Sign in</Text></TouchableOpacity>
 				</View>
 			{/* </View> */}
       </ScrollView>
@@ -123,6 +259,7 @@ const styles = StyleSheet.create({
   },
   signuptextContainer:{
     flexGrow:1,
+    marginTop: 30,
     alignItems:'center',
     justifyContent :'center',
   },
@@ -170,6 +307,7 @@ const styles = StyleSheet.create({
     paddingHorizontal:26,
     alignItems: 'center',
     fontSize:16,
+    marginLeft: 35,
     color:'#000000',
     marginVertical: 10
   },
@@ -193,7 +331,32 @@ const styles = StyleSheet.create({
     paddingHorizontal:26,
     alignItems: 'center',
     fontSize:16,
+    marginLeft:-70,
     color:'#000000',
+    marginVertical: 10
+  },
+  inputBox9: {
+    width:180,
+    height:45,
+    backgroundColor:'rgba(255, 255,255,1.0)',
+    borderRadius: 8,
+    paddingHorizontal:26,
+    alignItems: 'center',
+    fontSize:16,
+    marginLeft:-70,
+    color:'#000000',
+    marginVertical: 10
+  },
+  inputBox6: {
+    width:260,
+    height:45,
+    backgroundColor:'rgba(255, 255,255,1.0)',
+    borderRadius: 8,
+    paddingHorizontal:26,
+    alignItems: 'center',
+    fontSize:16,
+    color:'#000000',
+    marginLeft:-5,
     marginVertical: 10
   },
   button: {
@@ -218,7 +381,7 @@ const styles = StyleSheet.create({
 
   },
   SignupSVG : {
-    marginLeft: 50,
+    marginLeft: 85,
     marginTop: 25,
 
   },
@@ -229,6 +392,7 @@ const styles = StyleSheet.create({
   {
     width: 150,
     height:45,
+    marginLeft:10,
     borderColor:'blue',
     borderWidth: 1
   },
@@ -236,6 +400,15 @@ const styles = StyleSheet.create({
   {
     width: 190,
     height:45,
+    borderColor:'blue',
+    borderWidth: 1
+  },
+  picker2:
+  {
+    marginLeft:90,
+    width: 270,
+    height:45,
+    marginLeft:10,
     borderColor:'blue',
     borderWidth: 1
   }

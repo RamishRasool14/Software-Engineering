@@ -7,26 +7,44 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native';
-import SigninSVG from '../Icons/SigninSVG'
-
-// import Logo from '../components/Logo';
-// import Form from '../components/Form';
+import SigninSVG from '../Icons/SigninSVG';
+import firebase from './firebase'
 
 
-export default class ServicePLogin extends Component {
+export default class ClientLogin extends Component {  
+  
+  constructor(props) {
+    super(props);
+    this.state = {
+      password: "",
+      email: "",
 
-  // servicepsignup() {
-	// 	Actions.servicepsignup()
-	// }
-  // dashboard()
-  // {
-  //   Actions.dashboard()
-  // }
+
+    };
+  }
+  actionsfun()
+  {
+    console.log(this.state.email)
+    console.log(this.state.password)
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.state.email, this.state.password)
+      .then((response) => {
+                  this.props.navigation.navigate('SPHome')  
+              })
+             
+    
+      .catch(error => {
+          alert(error)
+      })
+   
+  }
 
 	render() {
 		return(
 			<View style={styles.container}>
-        <View >
+				
+        <View>
         <Text style={styles.textContainer0}>Welcome back!</Text>
         </View>
         <View style={{flexDirection : 'row'}}>
@@ -39,24 +57,27 @@ export default class ServicePLogin extends Component {
               placeholderTextColor = "rgba(0,0,0,0.4)"
               selectionColor="#fff"
               keyboardType="email-address"
-              onSubmitEditing={()=> this.password.focus()}
+              onChangeText={(value) => this.setState({email: value})}
+              value={this.state.email}
               />
           <TextInput style={styles.inputBox} 
               placeholder="Password"
               secureTextEntry={true}
               placeholderTextColor = "rgba(0,0,0,0.4)"
-              ref={(input) => this.password = input}
+              onChangeText={(value) => this.setState({password: value})}
+              value={this.state.password}
               />  
             <TouchableOpacity style={styles.button}
-            onPress = {() => this.props.navigation.navigate('SPHome')}>
+            onPress = {this.actionsfun.bind(this)}>
              <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress = {() => this.props.navigation.navigate('ForgetPassword')}
-><Text style={styles.signupButton}> Forgot Password?</Text></TouchableOpacity>
+            
+    
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgetPassword')}><Text style={styles.signupButton}> Forgot Password?</Text></TouchableOpacity>
         </View> 
 				<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Don't have an account?</Text>
-					<TouchableOpacity onPress = {() => this.props.navigation.navigate('SPSignUP')}><Text style={styles.signupButton}> Sign up</Text></TouchableOpacity>
+					<TouchableOpacity onPress={() => this.props.navigation.navigate('SPSignUP')}><Text style={styles.signupButton}> Sign up</Text></TouchableOpacity>
 				</View>
 			</View>	
 			);
@@ -124,7 +145,7 @@ const styles = StyleSheet.create({
 
   },
   textContainer1:{
-    marginLeft: 10,
+    textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
     color: 'rgba(0,0,0,1.0)'
