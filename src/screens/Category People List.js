@@ -1,5 +1,6 @@
 import React , { useState }from 'react';
-import firebase from 'firebase';
+import  { useEffect }from 'react';
+import firebase from './firebase';
 
 
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
@@ -11,118 +12,46 @@ import {View, Text, Animated,Image,Dimensions ,ImageBackground,TextInput, StyleS
 import { StatusBar } from 'expo-status-bar';
 import StarRating from 'react-native-star-rating';
 
-// firebase.database().ref('users').on('value', (data) => {
-//     console.log(data.toJSON())
-
-
-// })
 
 
 
-const DATA = [
 
-    {
-        key : '1',
-        Name: 'Daniyal Ahmed Khan',
-        Location: 'DHA Phase-5',
-        Rating: 4.5,
-        Cost : '800 PKR per hour',
-        Picture : require('../images/Categories_List/1.png'),
-        
-        
-    },
-
-    {
-        key : '2',
-        Name: 'Ahsan Iqbal',
-        Location: 'DHA Phase-5',
-        Rating: 5,
-        Cost : '800 PKR per hour',
-        Picture : require('../images/Categories_List/2.png')
-        
-        
-    },
-    {
-        key :'3',
-
-        Name: 'Saad',
-        Location: 'DHA Phase-5',
-        Rating: 5,
-        Cost : '800 PKR per hour',
-        Picture : require('../images/Categories_List/3.png')
-        
-        
-    },
-    {
-        key : '4',
-
-        Name: 'Ramish',
-        Location: 'DHA Phase-5',
-        Rating: 3,
-        Cost : '1000 PKR per hour',
-        Picture : require('../images/Categories_List/4.png')
-        
-        
-    },
-    {
-        key: '5' ,
-        Name: 'Imran Khan',
-        Location: 'DHA Phase-5',
-        Rating: 4,
-        Cost : '700 PKR per hour',
-        Picture : require('../images/Categories_List/5.png')
-        
-        
-        
-    },
-    {
-        key: '6' ,
-
-        Name: 'Nawaz Sharif',
-        Location: 'DHA Phase-5',
-        Rating: 2,
-        Cost : '100 PKR per hour',
-        Picture : require('../images/Categories_List/6.png')
-        
-        
-    },
-    {
-        key: '7' ,
-
-        Name: 'Abdul Ghafoor',
-        Location: 'DHA Phase-5',
-        Rating: 2,
-        Cost : '100 PKR per hour',
-        Picture : require('../images/Categories_List/4.png')
-        
-        
-    },
-    {
-        key: '8' ,
-
-        Name: 'Momin',
-        Location: 'DHA Phase-5',
-        Rating: 2,
-        Cost : '100 PKR per hour',
-        Picture : require('../images/Categories_List/6.png')
-        
-        
-    }
-
-
-]
 
 const SPACING = 20;
 const AVATAR_SIZE = 90;
 const ITEM_SIZE = AVATAR_SIZE + SPACING*3;
 const BigImage = require('../images/Categories_List/P.jpeg') 
 
-export default function App ({navigation}) {
+export default function App ({route, navigation}) {
+
+    const [DATA, UpdateData]= useState([])
+
+    const fetchData = () => {
+        firebase
+            .database()
+            .ref("/users")
+            .on("value", snapshot => {
+                const data = snapshot.val()
+                UpdateData(Object.values(data))
+        })
+
+    }
+
+    
+    
+    useEffect(() => 
+    fetchData(), []);
+        
+
+
+
+
+
+        console.log(route.params)
 
     
 
         const scrollY = React.useRef( new Animated.Value(0)).current;
-        // const [rating, setRating] = React.useStatse(0)
 
         const setTheRating = (Passedrating)=> {
 
@@ -214,7 +143,7 @@ export default function App ({navigation}) {
                 }}>
                     <Image
                     
-                    source = {item.Picture}
+                    source = {{uri : item.Picture}}
                     style = {{width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: AVATAR_SIZE,
                     
                         marginRight: SPACING/2

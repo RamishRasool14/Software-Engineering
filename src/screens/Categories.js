@@ -99,8 +99,26 @@ export default class Home extends React.Component {
   }
 
   state = {
-    isFontLoaded : false
+    isFontLoaded : false,
+    data : this.props.route.params,
+    chosenCategory : ''
+    
   }
+
+  processPress = (categoryName,id) => {
+
+    this.setState(prevstate => ({
+      data : {
+        ...prevstate.data,
+        chosenCategory : id
+      }
+    }), () => {
+      this.props.navigation.navigate(categoryName, this.state.data)
+    }
+    )
+  }
+
+  
   
     render(){
 
@@ -134,7 +152,7 @@ export default class Home extends React.Component {
 
                 <View style = {{flexDirection:'row'}}>
 
-                <TouchableOpacity id = 'Gardener' onPress = {() => this.props.navigation.navigate('CompletedOrders')}>
+                <TouchableOpacity  onPress = {() => this.processPress('CompletedOrders','Gardener')} >
 
                     <Cardl>
                   <Image source={Gardener} alt="Logo" style = {{width: 100, height : 110, paddingLeft: 70}} />
@@ -143,7 +161,7 @@ export default class Home extends React.Component {
 
 
 
-                  <TouchableOpacity id = 'Electrician'  onPress = {() => this.props.navigation.navigate('CompletedOrders')}>
+                  <TouchableOpacity onPress = {() => this.processPress('CompletedOrders' , 'Electrician')}>
                     <Cardr>
                   <Image source={Electrican} alt="Logo" style = {{width: 80, height :110 , paddingLeft: 70}} />
                     </Cardr>
@@ -164,7 +182,7 @@ export default class Home extends React.Component {
 
                 <View style = {{flexDirection:'row'}}>
 
-                <TouchableOpacity onPress = {() => this.props.navigation.navigate('CompletedOrders')}>
+                <TouchableOpacity onPress = {() => this.processPress('CompletedOrders' , 'Mechanic')}>
 
                 <Cardl>
               <Image source={Mechanic} alt="Logo" style = {{width: 100, height : 100, paddingLeft: 70}} />
@@ -175,7 +193,7 @@ export default class Home extends React.Component {
 
 
 
-                <TouchableOpacity onPress = {() => this.props.navigation.navigate('CompletedOrders')}>
+                <TouchableOpacity onPress = {() => this.processPress('CompletedOrders' , 'Plumber')}>
 
                   <Cardr>
 
@@ -203,7 +221,7 @@ export default class Home extends React.Component {
 
               <View style = {{flexDirection:'row'}}>
 
-              <TouchableOpacity onPress = {() => this.props.navigation.navigate('CompletedOrders')}>
+              <TouchableOpacity onPress = {() => this.processPress('CompletedOrders' , 'Labor')}>
                     <Cardl>
                   <Image source={Labor} alt="Logo" style = {{width: 100, height : 110, paddingLeft: 70}} />
 
@@ -213,7 +231,7 @@ export default class Home extends React.Component {
 
 
 
-                  <TouchableOpacity onPress = {() => this.props.navigation.navigate('CompletedOrders')}>
+                  <TouchableOpacity onPress = {() => this.processPress('CompletedOrders' , 'CarWasher')}>
 
                     <Cardr>
 
