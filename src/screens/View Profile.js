@@ -9,27 +9,25 @@ import Reviews from "../Icons/Reviews";
 
 
 
-export default function App({navigation}){
+export default function App({route, navigation}){
+    console.log()
+    const PassedObject = route.params
+    const name = PassedObject.chosenSP.Name
+    const category =  PassedObject.chosenCategory
+    const picture = PassedObject.chosenSP.Picture
+
 
 return (
+
 
     <SafeAreaView style = {styles.container}> 
 
     <ScrollView showsVerticalScrollIndicator = {false}> 
     
-    {/* <View style={styles.titleBar}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Ionicons name="ios-arrow-back" size={30} color="#52575D"></Ionicons>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <Ionicons name="md-menu" size={30} color="#52575D"></Ionicons>
-                    </TouchableOpacity>
-    </View> */}
 
     <View style={{ alignSelf: "center" }}>
                     <View style={styles.profileImage}>
-                        <Image source={require("../images/PP1.png")} style={styles.image} resizeMode="center"></Image>
+                        <Image source={{uri : picture}} style={styles.image} resizeMode="center"></Image>
                     </View>
 
                     <TouchableOpacity  style={styles.dm}> 
@@ -46,8 +44,8 @@ return (
     </View>
 
     <View style={styles.infoContainer}>
-        <Text style={[styles.text, { fontWeight: "200", fontSize: 40 }]}>Saad</Text>
-        <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>Electrican</Text>
+        <Text style={[styles.text, { fontWeight: "200", fontSize: 35 }]}>{name}</Text>
+        <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>{category}</Text>
     </View>
 
     <View style={styles.statsContainer}>

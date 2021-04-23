@@ -25,6 +25,17 @@ const BigImage = require('../images/Categories_List/P.jpeg')
 export default function App ({route, navigation}) {
 
     const [DATA, UpdateData]= useState([])
+    const processPress = (object) => {
+
+        const data = route.params
+        data ['chosenSP'] = object
+        console.log(data)
+        navigation.navigate('ViewProfile', data)
+    
+    }
+
+
+        
 
     const fetchData = () => {
         firebase
@@ -41,14 +52,6 @@ export default function App ({route, navigation}) {
     
     useEffect(() => 
     fetchData(), []);
-        
-
-
-
-
-
-        console.log(route.params)
-
     
 
         const scrollY = React.useRef( new Animated.Value(0)).current;
@@ -126,7 +129,7 @@ export default function App ({route, navigation}) {
 
             return (
 
-                <TouchableOpacity onPress = {()=> navigation.navigate('ViewProfile')}>
+                <TouchableOpacity onPress = {()=> processPress(item)}>
                 
                 <Animated.View style = {{flexDirection: 'row', padding: SPACING, marginBottom: SPACING, backgroundColor: 'rgba(255,255,255,1)', borderRadius: 12,
                 

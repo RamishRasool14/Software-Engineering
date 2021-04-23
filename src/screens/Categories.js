@@ -114,6 +114,7 @@ export default class Home extends React.Component {
       }
     }), () => {
       this.props.navigation.navigate(categoryName, this.state.data)
+      // console.log(this.state.data)
     }
     )
   }
