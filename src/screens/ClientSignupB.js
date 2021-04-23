@@ -12,11 +12,18 @@ import {
 } from 'react-native';
 import SignupSVG from '../Icons/SignupSVG'
 import {Picker} from '@react-native-community/picker';
-import "firebase/firestore";
 
-import firebase from "./firebase";
+// import Logo from '../components/Logo';
+
+
+// import {Actions} from 'react-native-router-flux';
+
 export default class ClientSignup extends Component {
-    
+    // const [pickerValue, setPickerValue ] = useState('Punjab')
+
+//   dashboard() {
+//     Actions.dashboard();
+// }
 constructor(props) {
     super(props);
     this.state = {
@@ -34,47 +41,63 @@ constructor(props) {
 
     };
   }
+//   state = {
+//     password: "",
+//     email: "",
+//     city: "",
+//     province: "",
+//     username: "",
+//     colony: "",
+//     SQ: "",
+//     phonenumber: 0,
+//     securityanswer: ""
+
+//   };
 
 
-
+  // goBack() {
+  //     Actions.pop();
+  // }
+//   clientlogin() {
+//     Actions.clientlogin();
+// }
 myfun(){
-    
-  firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.state.email, this.state.password)
-          .then((response) => {
-              const uid = response.user.uid
-              const data = {
-                  id: uid,
-                  email: this.state.email,
-                  fullName: this.state.username,
-              };
-              firebase
-                  .firestore()
-                  .collection('users')
-                  .doc(uid)
-                  .set(data)
-                  .then(() => {
-                    this.props.navigation.navigate('ClientLogin')
-                  })
-                  .catch((error) => {
-                      alert(error)
-                  });
-          })
-          .catch((error) => {
-              alert(error)
-      });
+    // console.log(this.state.username);
+    // console.log(this.state.password);
+    // console.log(this.state.email);
+    // console.log(this.state.phonenumber);
+    // console.log(this.state.city);
+    // console.log(this.state.province);
+    // console.log(this.state.colony);
+    // console.log(this.state.SQ);
+    // console.log(this.state.securityanswer);
 
-
-      this.props.navigation.navigate('ClientLogin')
+    Alert.alert('Please Enter Name');
+    // Actions.clientlogin();
 
 }
+// myfun2 = e =>  {
+//     // this.setState({username: e.target})
+//     console.log(e.target)
+
+// }
+// myfun2(event = {}) {
+//     const name = event.target && event.target.name;
+//     const value = event.target && event.target.value;
+  
+//     // this.setState([name]: value);
+//     console.log(name,value)
+//   }
+  
+
 
 	render() {
 		return(
       <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-			
+			{/* <View style={styles.container}> */}
+				{/* <Logo/> */}
+				{/* <Form type="Signup"/> */}
         <View>
         <Text style={styles.textContainer0}>Register With Us!</Text>
         </View>
@@ -83,9 +106,10 @@ myfun(){
         <TextInput style={styles.inputBox}  
               placeholder="Email Address"
               placeholderTextColor = "rgba(0,0,0,0.4)"
+            //   ref={(input) => this.state.email = input}
             onChangeText={(value) => this.setState({email: value})}
               value={this.state.email}
-              
+              required
             
               />
               <TextInput style={styles.inputBox} 
@@ -223,7 +247,7 @@ myfun(){
           </View>
 				<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Already have an account?</Text>
-					<TouchableOpacity onPress={this.goBack}><Text style={styles.signupButton}> Sign in</Text></TouchableOpacity>
+					<TouchableOpacity onPress = {() => this.props.navigation.navigate('ClientLogin')}><Text style={styles.signupButton}> Sign in</Text></TouchableOpacity>
 				</View>
 			{/* </View> */}
       </ScrollView>

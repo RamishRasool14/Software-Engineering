@@ -29,7 +29,6 @@ export default function App ({route, navigation}) {
 
         const data = route.params
         data ['chosenSP'] = object
-        console.log(data)
         navigation.navigate('ViewProfile', data)
     
     }

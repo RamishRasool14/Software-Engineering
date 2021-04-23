@@ -10,11 +10,18 @@ import Reviews from "../Icons/Reviews";
 
 
 export default function App({route, navigation}){
-    console.log()
     const PassedObject = route.params
     const name = PassedObject.chosenSP.Name
     const category =  PassedObject.chosenCategory
     const picture = PassedObject.chosenSP.Picture
+
+    const processPress = () => {
+
+        const data = route.params
+        navigation.navigate('Order', data)
+    
+    }
+
 
 
 return (
@@ -100,7 +107,7 @@ return (
 
             
 
-            <TouchableOpacity onPress = {() => navigation.navigate('Order')}>
+            <TouchableOpacity onPress = {() => processPress()}>
                         
             <BookNow >
 

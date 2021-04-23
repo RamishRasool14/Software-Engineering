@@ -7,56 +7,24 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native';
-import SigninSVG from '../Icons/SigninSVG';
-import firebase from './firebase'
+import SigninSVG from '../Icons/SigninSVG'
 
+// import Logo from '../components/Logo';
+// import Form from '../components/Form';
 
-export default class ClientLogin extends Component {  
+// import {Actions} from 'react-native-router-flux';
+
+export default class ClientLogin extends Component {
+
+  // dashboard()
+  // {
+  //   Actions.dashboard()
+  // }
   
-  constructor(props) {
-    super(props);
-    this.state = {
-      password: "",
-      email: "",
-
-
-    };
-  }
-  actionsfun()
-  {
-    console.log(this.state.email)
-    console.log(this.state.password)
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then((response) => {
-          const uid = response.user.uid
-          const usersRef = firebase.firestore().collection('users')
-          usersRef
-              .doc(uid)
-              .get()
-              .then(firestoreDocument => {
-                  if (!firestoreDocument.exists) {
-                      alert("User does not exist anymore.")
-                      return;
-                  }
-                  const user = firestoreDocument.data()
-                  this.props.navigation.navigate('Home')  
-              })
-              .catch(error => {
-                  alert(error)
-              });
-      })
-      .catch(error => {
-          alert(error)
-      })
-   
-  }
 
 	render() {
 		return(
 			<View style={styles.container}>
-				
         <View>
         <Text style={styles.textContainer0}>Welcome back!</Text>
         </View>
@@ -70,27 +38,24 @@ export default class ClientLogin extends Component {
               placeholderTextColor = "rgba(0,0,0,0.4)"
               selectionColor="#fff"
               keyboardType="email-address"
-              onChangeText={(value) => this.setState({email: value})}
-              value={this.state.email}
+              onSubmitEditing={()=> this.password.focus()}
               />
           <TextInput style={styles.inputBox} 
               placeholder="Password"
               secureTextEntry={true}
               placeholderTextColor = "rgba(0,0,0,0.4)"
-              onChangeText={(value) => this.setState({password: value})}
-              value={this.state.password}
+              ref={(input) => this.password = input}
               />  
             <TouchableOpacity style={styles.button}
-            onPress = {this.actionsfun.bind(this)}>
-             <Text style={styles.buttonText}>Jane de</Text>
+            onPress = {() =>this.props.navigation.navigate('Home')}>
+             <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>
             
-    
             <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgetPassword')}><Text style={styles.signupButton}> Forgot Password?</Text></TouchableOpacity>
         </View> 
 				<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Don't have an account?</Text>
-					<TouchableOpacity onPress={() => this.props.navigation.navigate('ClientSignUp')}><Text style={styles.signupButton}> Sign up</Text></TouchableOpacity>
+					<TouchableOpacity onPress = {() => this.props.navigation.navigate('ClientSignUp')}><Text style={styles.signupButton}> Sign up</Text></TouchableOpacity>
 				</View>
 			</View>	
 			);

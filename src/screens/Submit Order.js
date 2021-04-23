@@ -1,15 +1,56 @@
 import React from "react";
-import { SafeAreaView, StyleSheet, TextInput, ScrollView, View, TouchableOpacity ,Text} from "react-native";
+import { Alert, SafeAreaView, StyleSheet, TextInput, ScrollView, View, TouchableOpacity ,Text} from "react-native";
 import SubmitOrderSvg from "../Icons/SubmitOrderSvg";
-
+import firebase from './firebase'
 
 class AutoExpandingTextInput extends React.Component {
 
+
   constructor(props) {
     super(props);
-    this.state = {text: '', height: 0};
+    this.state = {text: '', height: 0, OrderDetails : {} };
+    this.textInput1 = '';
+    this.textInput2 = '';
+    this.textInput3 = '';
   }
+
+  showAlert1() {  
+    Alert.alert(  
+        'Confirm Order',  
+        'Do you want to complete the order?',  
+        [  
+            {  
+                text: 'Cancel',  
+                onPress: () => console.log('Cancel Pressed'),  
+                style: 'cancel',  
+            },  
+            {text: 'OK', onPress: () => this.processPress()},  
+        ]  
+    );  
+}
+  processPress (){
+
+    console.log()
+    const FinalOrder = this.props.route.params
+    FinalOrder ['OrderDetails'] = this.state.OrderDetails
+
+    firebase
+      .database()
+      .ref('Orders')
+      .push()
+      .set(
+        FinalOrder) 
+
+    console.log(FinalOrder)
+    this.textInput1.clear()
+    this.textInput2.clear()
+    this.textInput3.clear()
+    
+
+}
+ 
   render() {
+        
     return (
 
       <ScrollView>
@@ -24,6 +65,20 @@ class AutoExpandingTextInput extends React.Component {
         placeholder="Title"
         placeholderTextColor = '#2E305F'
         style={[styles.input1]}
+        ref={input => { this.textInput1 = input }}
+        onChangeText = {
+          
+          (val) => this.setState(prevstate => ({
+            OrderDetails : {
+              ...prevstate.OrderDetails,
+              title : val
+            }
+    
+          })
+          )
+        
+        
+        }
 
       />
 
@@ -33,8 +88,25 @@ class AutoExpandingTextInput extends React.Component {
         multiline={true}
         placeholder="Your Budget"
         placeholderTextColor = '#2E305F'
+        ref={input => { this.textInput2 = input }}
 
         style={[styles.input]}
+
+        onChangeText = {
+          
+          (val) => this.setState(prevstate => ({
+            OrderDetails : {
+              ...prevstate.OrderDetails,
+              budget : val
+            }
+    
+          })
+          )
+        
+        
+        }
+
+
       />
 
       <TextInput
@@ -42,19 +114,29 @@ class AutoExpandingTextInput extends React.Component {
         multiline={true}
         placeholder="Description"
         placeholderTextColor = '#2E305F'
+        ref={input => { this.textInput3 = input }}
 
 
-        onChangeText={(text) => {
-            this.setState({ text })
-        }}
+        onChangeText = {
+          
+          (val) => this.setState(prevstate => ({
+            OrderDetails : {
+              ...prevstate.OrderDetails,
+              description : val
+            }
+    
+          })
+          )
+        
+        
+        }
         onContentSizeChange={(event) => {
             this.setState({ height: event.nativeEvent.contentSize.height })
         }}
         style={[styles.input, {height: Math.max(35, this.state.height)}]}
-        value={this.state.text}
       />
 
-      <TouchableOpacity style = {styles.button}>
+      <TouchableOpacity style = {styles.button} onPress = {() => this.showAlert1()}>
 
         <Text style = {styles.text}>Complete</Text>
 

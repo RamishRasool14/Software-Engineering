@@ -46,12 +46,7 @@ export default class Signup extends Component {
               placeholderTextColor = "#000000"
               ref={(input) => this.password = input}
               />
-              {/* <Button 
-                onPress = {this.dashboard}
-                title = "Sign Up"
-
-              /> */}
-            <TouchableOpacity style={styles.button}>
+              <TouchableOpacity style={styles.button}>
              <Text style={styles.buttonText}>Sign Up</Text>
             </TouchableOpacity>
           </View>
