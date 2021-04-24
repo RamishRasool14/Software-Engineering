@@ -3,8 +3,6 @@ import Icon from '@expo/vector-icons/MaterialCommunityIcons';
 // import { SearchBar } from 'react-native-elements';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 import {View, Text, Image,Dimensions ,ImageBackground,TextInput, StyleSheet} from 'react-native';
-
-import {Actions} from 'react-native-router-flux';
 import TransCard from '../shared/TransCard'
 import Card from '../shared/card'
 

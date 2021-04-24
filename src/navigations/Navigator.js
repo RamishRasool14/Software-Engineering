@@ -22,6 +22,9 @@ import SPHome from "../screens/Service_Provider_Dashboard";
 import SPCompleted from "../screens/Completed_Orders_List";
 import SPPending from "../screens/Pending_Orders_List";
 import SPReviews from "../screens/Reviews_List";
+import AdminDashboard from "../screens/Admin_Dashboard";
+import Transactions from "../screens/Transaction";
+import Blacklist from "../screens/Blacklist_Users";
 
 
 
@@ -45,6 +48,10 @@ return (
         <Stack.Screen name = "SPCompleted" component = {SPCompleted} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPPending" component = {SPPending} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPReviews" component = {SPReviews} options={{ headerShown: false }}/>
+        <Stack.Screen name = "AdminDashboard" component = {AdminDashboard} options={{ headerShown: false }}/>
+        <Stack.Screen name = "Transactions" component = {Transactions} options={{ headerShown: false }}/>
+        <Stack.Screen name = "Blacklist" component = {Blacklist} options={{ headerShown: false }}/>
+
 
 
            <Stack.Screen name = "Home" component = {Home} options={{ headerShown: false }}/> 

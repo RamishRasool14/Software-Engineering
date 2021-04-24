@@ -51,7 +51,12 @@ export default class MainScreen extends Component {
                     </MainScreenCard>                    
                   
                   </TouchableOpacity>
-                  
+
+
+               <TouchableOpacity onPress = {() => this.props.navigation.navigate('AdminDashboard')}>
+                  <Text style = {{fontSize:18, paddingLeft: 50,textShadowColor:'rgba(255, 255,255,0.5)',textShadowOffset:{width: 0, height: 1},textShadowRadius: 5,marginTop : 25,letterSpacing: 0.75,color: '#000000',fontWeight: 'bold' }}>Admin Dashboard</Text>                    
+                
+                </TouchableOpacity>
                   </View>
        
        
