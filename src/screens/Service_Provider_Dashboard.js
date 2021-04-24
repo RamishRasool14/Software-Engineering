@@ -1,68 +1,80 @@
 import React from 'react';
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
-// import { SearchBar } from 'react-native-elements';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
-import Card from '../shared/SPcard';
 import SPSmallCard from '../shared/SPsmallCard';
-import SPbutton from '../shared/SPButtonsCard';
 import { View, Text, Image, Dimensions, ImageBackground, TextInput, StyleSheet } from 'react-native';
 import CompletedOrders from '../Icons/CompletedOrders'
 import PendingOrders from '../Icons/PendingOrders'
 import Reviews from '../Icons/Reviews'
 import SPGraph from '../Icons/SPGraphStats'
-import SPHomeButton from '../Icons/SPHomeButton'
-import SPMsgButton from '../Icons/SPMsgButton'
-import SPNotificationButton from '../Icons/SPNotificationButton'
-import SPProfileButton from '../Icons/SPProfileButton'
-// import { Actions } from 'react-native-router-flux';
+import firebase from './firebase'
 
 export default class Home extends React.Component {
 
-    // checkCompletedOrders()
-    // {
-    //     Actions.completed_orders_list()
-    // }
-    // checkPendingOrders()
-    // {
-    //     Actions.pending_orders_list()
-    // }
-    // checkReviews()
-    // {
-    //     Actions.reviews_list()
-    // }
-    // reload()
-    // {
-    //     Actions.service_provider_dashboard()
-    // }
+    constructor(props) {
+        super(props);
+        this.state = {
+          isFontLoaded : false,
+          username : '' ,
+          ProfileP: null,
+    
+        };
+    
+    
+      }
 
-
-    state = {
-        isFontLoaded: false
+    SetScreen (){
+        firebase
+          .database()
+          .ref("/usernames/user2")
+          .on("value", snapshot => {
+            const name = snapshot.val().name
+            const Profile = snapshot.val().PP
+            this.setState(prevstate => ({
+              username:name,
+              ProfileP: Profile,
+            })
+            )})
+    
     }
+    componentDidMount () {
+      this.SetScreen()
+     
+    }
+    
+
+   
     render() {
 
         return (
-            <ImageBackground
-                source={require('../images/SPdashboard.png')}
-                style={styles.backgroundImage}>
-                
-                <View style={{
-                    flexDirection: "row",
-                    marginTop: 35,
-                    marginLeft: 10,
-                }}>
-                    <Card>
-                    </Card>
-                    <Text style={{position: 'absolute', width: 169, height: 37, left: 115,top: 23,fontStyle: 'normal', fontWeight: 'bold',fontSize: 22,lineHeight: 25,letterSpacing: 0.075, color: '#FFFFFF'}}>Hi, Rana!</Text>
+            <View style = {styles.backgroundImage}>
+
+             <View style = {styles.image}> 
+
+             <View style = {{flexDirection:'row'}}>
+
+            
+              <Text style = {{fontSize : 28, color: "white" , marginTop: 55,  marginLeft:30}}>{this.state.username} {'\n'}  <Text style = {{fontSize : 18,color: "white", marginTop: 0}}>It's time to make money</Text></Text> 
+              <TouchableOpacity onPress = {() => this.props.navigation.navigate('ViewClientProfile', this.state.data)}>
+             
+              <Image
                     
+                    source = {{uri : this.state.ProfileP}}
+                    style = {{width: 65, height: 65, marginTop: 60, marginLeft:55, borderRadius: 2,
+                    
+                  }}
+              />
+              </TouchableOpacity>
+
+              
+
                 </View>
-                {/* <View>
-                    <Text style={{ position: 'absolute', width: 69, height: 69, left: 60, top: 38, fontStyle: 'normal', fontWeight: 'bold', fontSize: 17, lineHeight: 19, letterSpacing: 0.075, color: '#2E305F' }}>Orders</Text>
-                </View> */}
+             </View>
+
                 <View style={{
                     flexDirection: 'row',
                     marginLeft: 4,
-                    marginTop: 60,
+                    marginTop: 10
                 }}>
                     <TouchableOpacity onPress={()=> this.props.navigation.navigate('SPCompleted')}>
                         <SPSmallCard>
@@ -79,7 +91,7 @@ export default class Home extends React.Component {
                     <TouchableOpacity onPress={()=> this.props.navigation.navigate('SPReviews')}>
                         <SPSmallCard>
                             <Reviews style = {styles.Reviews}/>
-                            <Text style={{ fontSize: 11, paddingLeft: 24, marginTop: 14, letterSpacing: 0.075, color: '#2E305F', fontWeight: 'bold' }}>Reviews</Text>
+                            <Text style={{ fontSize: 11, paddingLeft: 24, marginTop: 10, letterSpacing: 0.075, color: '#2E305F', fontWeight: 'bold' }}>Reviews</Text>
                         </SPSmallCard>
                     </TouchableOpacity>
                 </View>
@@ -131,33 +143,9 @@ export default class Home extends React.Component {
                         <Text style={{ position: 'absolute', width: 201, height: 18, left: 25, top: 95, fontStyle: 'normal', fontWeight: '500', fontSize: 12, lineHeight: 18, letterSpacing: 0.075, color: '#FFFFFF' }}>You have a new order!</Text>
                     </View>
                 </ImageBackground>
-                {/* <View style={{
-                    flexDirection: "row",
-                    marginTop: 330,
-                    marginLeft: 10,
-                }}>
-                    <TouchableOpacity onPress={this.reload}>
-                        <SPbutton>
-                            <SPHomeButton style={styles.SPHomeButton}/>
-                        </SPbutton>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <SPbutton>
-                            <SPMsgButton style={styles.SPMsgButton}/>
-                        </SPbutton>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <SPbutton>
-                            <SPNotificationButton style={styles.SPNotificationButton} />
-                        </SPbutton>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <SPbutton>
-                            <SPProfileButton style={styles.SPProfileButton} />
-                        </SPbutton>
-                    </TouchableOpacity>
-                </View> */}
-            </ImageBackground>
+                
+            </View>
+
         );
     }
 }
@@ -166,17 +154,18 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
         position: "absolute",
-        top: -24,
+        top: -10,
         left: 0,
         right: 0,
         bottom: 0,
-        zIndex: -1
+        zIndex: -1,
+        backgroundColor: 'white'
     },
     StatsImage: {
         position: "absolute",
         width: 331,
         height: 308,
-        top: 270,
+        marginTop: 300,
         left: 18,
         zIndex: -0.5
     },
@@ -214,7 +203,7 @@ const styles = StyleSheet.create({
         marginLeft: 25
     },
     Reviews: {
-        marginTop: 10,
+        marginTop: 15,
         marginLeft: 20
     },
     SPGraph: {
@@ -247,5 +236,10 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         width: '40%'
+    },
+    image : {
+        height: 160,
+        borderBottomLeftRadius: 30,
+        backgroundColor: '#2E305F'
     }
 })

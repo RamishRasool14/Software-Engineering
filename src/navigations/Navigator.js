@@ -45,9 +45,36 @@ return (
         <Stack.Screen name = "SPSignUP" component = {SPSignUP} options={{ headerShown: false }}/>
         <Stack.Screen name = "ForgetPassword" component = {ForgetPassword} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPHome" component = {SPHome} options={{ headerShown: false }}/>
-        <Stack.Screen name = "SPCompleted" component = {SPCompleted} options={{ headerShown: false }}/>
-        <Stack.Screen name = "SPPending" component = {SPPending} options={{ headerShown: false }}/>
-        <Stack.Screen name = "SPReviews" component = {SPReviews} options={{ headerShown: false }}/>
+        <Stack.Screen name = "SPCompleted" component = {SPCompleted} options={{
+          title: 'Completed Orders',
+          headerStyle: {
+            backgroundColor: '#2E305F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>
+        <Stack.Screen name = "SPPending" component = {SPPending} options={{
+          title: 'Pending Orders',
+          headerStyle: {
+            backgroundColor: '#2E305F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>
+        <Stack.Screen name = "SPReviews" component = {SPReviews} options={{
+          title: 'Client Reviews',
+          headerStyle: {
+            backgroundColor: '#2E305F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>
         <Stack.Screen name = "AdminDashboard" component = {AdminDashboard} options={{ headerShown: false }}/>
         <Stack.Screen name = "Transactions" component = {Transactions} options={{ headerShown: false }}/>
         <Stack.Screen name = "Blacklist" component = {Blacklist} options={{ headerShown: false }}/>
