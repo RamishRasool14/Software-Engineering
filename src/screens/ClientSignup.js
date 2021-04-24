@@ -35,6 +35,15 @@ constructor(props) {
     };
   }
 
+  processPress (){
+
+    firebase
+      .database()
+      .ref('clients')
+      .push()
+      .set(this.state) 
+
+}
 
 
 myfun(){
@@ -43,6 +52,7 @@ myfun(){
           .auth()
           .createUserWithEmailAndPassword(this.state.email, this.state.password)
           .then((response) => {
+            this.processPress()
             this.props.navigation.navigate('ClientLogin')
           })
           .catch((error) => {

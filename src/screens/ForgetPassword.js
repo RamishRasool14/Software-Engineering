@@ -11,53 +11,97 @@ import {
 } from 'react-native';
 import SignupSVG from '../Icons/SignupSVG'
 import {Picker} from '@react-native-community/picker';
+import firebase from './firebase';
 
-// import Logo from '../components/Logo';
 
-
-// import {Actions} from 'react-native-router-flux';
 
 export default class ForgetPassword extends Component {
-    // const [pickerValue, setPickerValue ] = useState('Punjab')
 
-//   dashboard() {
-//     Actions.dashboard();
-// }
-//   resetpassword() {
-//     Actions.resetpassword();
-// }
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      question : "",
+      answer : ""
+    
+    };
+  }
+
+
+  fetchData = () => {
+    firebase
+        .database()
+        .ref("/clients")
+        .on("value", snapshot => {
+            const data = snapshot.val()
+            const DATA_RETREIVED = Object.values(data)
+            const AllEmails = []
+            for (let index = 0; index < DATA_RETREIVED.length; index++) {
+              const unit = DATA_RETREIVED[index];
+              AllEmails.push(unit.email)
+              
+            }
+            console.log(AllEmails)
+    })
+  
+  }
+      
+  
+  myfun(){
+    console.log(this.state.email)
+    console.log(this.state.answer)
+    console.log(this.state.question)
+    this.fetchData()
+}
+
 
 
 	render() {
 		return(
       <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
-			{/* <View style={styles.container}> */}
-				{/* <Logo/> */}
-				{/* <Form type="Signup"/> */}
+	
         <View>
         <Text style={styles.textContainer0}>Forgot Password?</Text>
         </View>
         <View style = {styles.signuptextContainer}>
         
-              
-              
 
 
-              <Text style={{fontSize: 14, color: '#000000',marginLeft: -150,marginTop: 30}}>Security question:</Text>
+            <TextInput style={styles.inputBox1}  
+              placeholder="Enter your email"
+              placeholderTextColor = "rgba(0,0,0,0.4)"
+              onChangeText={(value) => this.setState({email: value})}
+              value={this.state.email}
+              />
+
+
+              <Text style={{fontSize: 14, color: '#000000',marginLeft: -150}}>Security question:</Text>
+              
               
 
 
               <View style = {styles.inputBox6}>
-              <Picker style = {styles.picker2}>
+              <Picker style = {styles.picker2}
+                selectedValue={this.state.question}
+
+                onValueChange={(itemValue, itemIndex) => { 
+                  if (!itemValue) {
+                  return;
+                } 
+                  this.setState({ question: itemValue })}}
+              >
+                  <Picker.Item label="Pick security Question" vlaue="" />
                   <Picker.Item label=" Your nick name?" vlaue="Your nick name?" />
                   <Picker.Item label="Your pet's name?" vlaue="Your pet's name?" />
               </Picker>
               </View>
+
               <TextInput style={styles.inputBox}  
               placeholder="Your Answer"
               placeholderTextColor = "rgba(0,0,0,0.4)"
-              ref={(input) => this.securityanswer = input}
+              onChangeText={(value) => this.setState({answer: value})}
+              value={this.state.answer}
               />
               
               
@@ -67,7 +111,7 @@ export default class ForgetPassword extends Component {
               
             <View style = {{marginTop: 20}}>
             <TouchableOpacity style={styles.button}
-            onPress = {this.resetpassword}>
+            onPress = {this.myfun.bind(this)}>
              <Text style={styles.buttonText}>Confirm</Text>
             </TouchableOpacity>
             </View>
@@ -117,6 +161,16 @@ const styles = StyleSheet.create({
     fontSize:16,
     color:'#000000',
     marginVertical: 10
+  },
+  inputBox1: {
+    width:262,
+    height:42,
+    backgroundColor:'rgba(255, 255,255,1.0)',
+    borderRadius: 8,
+    paddingHorizontal:26,
+    fontSize:16,
+    color:'#000000',
+    marginVertical: 30
   },
   inputBox2: {
     width:115,

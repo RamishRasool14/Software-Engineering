@@ -66,7 +66,7 @@ export default class ClientLogin extends Component {
               />  
             <TouchableOpacity style={styles.button}
             onPress = {this.actionsfun.bind(this)}>
-             <Text style={styles.buttonText}>Jane de</Text>
+             <Text style={styles.buttonText}>Sign In</Text>
             </TouchableOpacity>
             
     
