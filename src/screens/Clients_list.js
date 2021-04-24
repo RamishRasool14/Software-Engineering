@@ -25,7 +25,6 @@ const DATA = [
         key : '1',
         Name: 'Daniyal Ahmed Khan',
         Location: 'DHA Phase-5',
-        ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/1.png'),
         
         
@@ -35,7 +34,6 @@ const DATA = [
         key : '2',
         Name: 'Ahsan Iqbal',
         Location: 'DHA Phase-5',
-        ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/2.png')
         
         
@@ -45,7 +43,6 @@ const DATA = [
 
         Name: 'Saad',
         Location: 'DHA Phase-5',
-        ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/3.png')
         
         
@@ -55,7 +52,6 @@ const DATA = [
 
         Name: 'Ramish',
         Location: 'DHA Phase-5',
-        ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/4.png')
         
         
@@ -64,7 +60,6 @@ const DATA = [
         key: '5' ,
         Name: 'Imran Khan',
         Location: 'DHA Phase-5',
-        ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/5.png')
         
         
@@ -75,7 +70,6 @@ const DATA = [
 
         Name: 'Nawaz Sharif',
         Location: 'DHA Phase-5',
-        ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/6.png')
         
         
@@ -85,7 +79,6 @@ const DATA = [
 
         Name: 'Abdul Ghafoor',
         Location: 'DHA Phase-5',
-        ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/4.png')
         
         
@@ -95,7 +88,6 @@ const DATA = [
 
         Name: 'Momin',
         Location: 'DHA Phase-5',
-        ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/6.png')
         
         
@@ -209,7 +201,7 @@ export default function App ({navigation}) {
                     }}
                     
                     />
-                    <View>
+                    <View style = {{alignContent: 'center',marginTop: 15}}>
                         <Text style = {{fontSize: 22, fontWeight: '700'}}>{item.Name}</Text>
                         <Text style = {{fontSize: 18, opacity: .7}}>Location: {item.Location}</Text>
                     </View>

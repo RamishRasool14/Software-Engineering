@@ -86,7 +86,7 @@ export default class Home extends React.Component {
                       </AdminSCard>
                   </TouchableOpacity>
                  
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress = {() => this.props.navigation.navigate('ServiceProvidersList')}>
                     <AdminSCard>
 
                     <Users style = {styles.Users}/>

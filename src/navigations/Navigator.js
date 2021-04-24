@@ -26,6 +26,8 @@ import AdminDashboard from "../screens/Admin_Dashboard";
 import Transactions from "../screens/Transaction";
 import BlacklistWorkers from "../screens/Blacklist_Workers";
 import BlacklistClients from "../screens/Blacklist_Clients";
+import ServiceProvidersList from "../screens/ServiceProviders_list"
+import ClientsList from "../screens/Clients_list"
 
 
 
@@ -80,6 +82,9 @@ return (
         <Stack.Screen name = "Transactions" component = {Transactions} options={{ headerShown: false }}/>
         <Stack.Screen name = "BlacklistWorkers" component = {BlacklistWorkers} options={{ headerShown: false }}/>
         <Stack.Screen name = "BlacklistClients" component = {BlacklistClients} options={{ headerShown: false }}/>
+        <Stack.Screen name = "ServiceProvidersList" component = {ServiceProvidersList} options={{ headerShown: false }}/>
+        <Stack.Screen name = "ClientsList" component = {ClientsList} options={{ headerShown: false }}/>
+        
 
 
 
