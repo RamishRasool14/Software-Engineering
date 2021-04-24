@@ -64,7 +64,7 @@ myfun(){
 	render() {
 		return(
       <View style={styles.container}>
-      <ScrollView style={styles.scrollView}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator = {false}>
 			
         <View>
         <Text style={styles.textContainer0}>Register With Us!</Text>

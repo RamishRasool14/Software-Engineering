@@ -100,7 +100,7 @@ export default function App({ route, navigation }) {
     return (<View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Animated.FlatList
             data={DATA}
-            keyExtractor={item => item.key}
+            keyExtractor={item => 'Hammad'}
             onScroll={Animated.event(
                 [{ nativeEvent: { contentOffset: { y: scrollY } } }],
                 { useNativeDriver: true }
@@ -132,7 +132,9 @@ export default function App({ route, navigation }) {
                     outputRange: [1, 1, 1, 0]
                 })
                 return (
+                    <TouchableOpacity onPress = {() => navigation.navigate('SPPendingOrderDetails', item)}>
                     <Animated.View style={{
+                        key : index,
                         flexDirection: 'row', padding: SPACING, marginBottom: SPACING, backgroundColor: 'rgba(255,255,255,1)', borderRadius: 12,
                         shadowColor: '#000',
                         shadowOffset: {
@@ -158,6 +160,8 @@ export default function App({ route, navigation }) {
                             <Text style={{ fontSize: 16, opacity: .8, fontWeight: '700'}}>Tap to View Details</Text>
                         </View>
                     </Animated.View>
+                    </TouchableOpacity>
+
                 )
             }}
         />
@@ -180,4 +184,3 @@ const styles = StyleSheet.create({
         marginLeft: 15
     }
 })
-

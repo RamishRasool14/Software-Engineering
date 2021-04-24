@@ -28,7 +28,7 @@ import BlacklistWorkers from "../screens/Blacklist_Workers";
 import BlacklistClients from "../screens/Blacklist_Clients";
 import ServiceProvidersList from "../screens/ServiceProviders_list"
 import ClientsList from "../screens/Clients_list"
-
+import SPPendingOrderDetails from "../screens/ViewPendingOrderDetail"
 
 
 const Stack = createStackNavigator()
@@ -58,6 +58,18 @@ return (
             fontWeight: 'bold',
           },
         }}/>
+
+        <Stack.Screen name = "SPPendingOrderDetails" component = {SPPendingOrderDetails} options={{
+          title: 'Order Details',
+          headerStyle: {
+            backgroundColor: '#2E305F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>
+
         <Stack.Screen name = "SPPending" component = {SPPending} options={{
           title: 'Pending Orders',
           headerStyle: {
