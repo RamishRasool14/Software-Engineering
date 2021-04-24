@@ -76,7 +76,7 @@ export default class Home extends React.Component {
               }}>
 
 
-                  <TouchableOpacity onPress = {() => this.props.navigation.navigate('Blacklist')}>
+                  <TouchableOpacity onPress = {() => this.props.navigation.navigate('BlacklistWorkers')}>
                     <AdminSCard>
 
                       

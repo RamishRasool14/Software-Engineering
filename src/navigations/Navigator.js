@@ -24,7 +24,8 @@ import SPPending from "../screens/Pending_Orders_List";
 import SPReviews from "../screens/Reviews_List";
 import AdminDashboard from "../screens/Admin_Dashboard";
 import Transactions from "../screens/Transaction";
-import Blacklist from "../screens/Blacklist_Users";
+import BlacklistWorkers from "../screens/Blacklist_Workers";
+import BlacklistClients from "../screens/Blacklist_Clients";
 
 
 
@@ -77,7 +78,8 @@ return (
         }}/>
         <Stack.Screen name = "AdminDashboard" component = {AdminDashboard} options={{ headerShown: false }}/>
         <Stack.Screen name = "Transactions" component = {Transactions} options={{ headerShown: false }}/>
-        <Stack.Screen name = "Blacklist" component = {Blacklist} options={{ headerShown: false }}/>
+        <Stack.Screen name = "BlacklistWorkers" component = {BlacklistWorkers} options={{ headerShown: false }}/>
+        <Stack.Screen name = "BlacklistClients" component = {BlacklistClients} options={{ headerShown: false }}/>
 
 
 

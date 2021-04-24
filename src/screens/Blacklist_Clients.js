@@ -25,7 +25,6 @@ const DATA = [
         key : '1',
         Name: 'Daniyal Ahmed Khan',
         Location: 'DHA Phase-5',
-        Category: 'Electrician',
         ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/1.png'),
         
@@ -36,7 +35,6 @@ const DATA = [
         key : '2',
         Name: 'Ahsan Iqbal',
         Location: 'DHA Phase-5',
-        Category: 'Electrician',
         ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/2.png')
         
@@ -47,7 +45,6 @@ const DATA = [
 
         Name: 'Saad',
         Location: 'DHA Phase-5',
-        Category: 'Electrician',
         ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/3.png')
         
@@ -58,7 +55,6 @@ const DATA = [
 
         Name: 'Ramish',
         Location: 'DHA Phase-5',
-        Category: 'Electrician',
         ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/4.png')
         
@@ -68,7 +64,6 @@ const DATA = [
         key: '5' ,
         Name: 'Imran Khan',
         Location: 'DHA Phase-5',
-        Category: 'Electrician',
         ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/5.png')
         
@@ -80,7 +75,6 @@ const DATA = [
 
         Name: 'Nawaz Sharif',
         Location: 'DHA Phase-5',
-        Category: 'Electrician',
         ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/6.png')
         
@@ -91,7 +85,6 @@ const DATA = [
 
         Name: 'Abdul Ghafoor',
         Location: 'DHA Phase-5',
-        Category: 'Electrician',
         ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/4.png')
         
@@ -102,7 +95,6 @@ const DATA = [
 
         Name: 'Momin',
         Location: 'DHA Phase-5',
-        Category: 'Electrician',
         ReportedBy: 'Ahsan Iqbal',
         Picture : require('../images/Categories_List/6.png')
         
@@ -128,7 +120,17 @@ export default function App ({navigation}) {
 
           
 
-        return( <View style = {{flex: 1, backgroundColor : '#fff'}}>
+        return( 
+        <View style = {{flex: 1, backgroundColor : '#fff'}}>
+            <View style = {{marginTop: 40,marginLeft: 70,flexDirection:'row'}} >
+                <TouchableOpacity onPress = {()=> navigation.navigate('BlacklistWorkers')}>
+                <Text style = {{fontSize: 22,fontWeight: 'bold',opacity:0.7}}>Workers</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                <Text style = {{fontSize: 22,marginLeft: 130,fontWeight: 'bold',textDecorationLine: 'underline'}}>Clients</Text>
+                </TouchableOpacity>
+                </View>
+            
             
             
         
@@ -152,6 +154,7 @@ export default function App ({navigation}) {
             paddingTop: StatusBar.currentHeight || 42
         }}
         renderItem = {({item, index}) => {
+            
 
             const inputRange = [
                 -1,
@@ -176,6 +179,7 @@ export default function App ({navigation}) {
                 inputRange: opacityInputRange,
                 outputRange: [1,1,1,0]
             })
+            
 
             return (
                 
@@ -207,7 +211,6 @@ export default function App ({navigation}) {
                     />
                     <View>
                         <Text style = {{fontSize: 22, fontWeight: '700'}}>{item.Name}</Text>
-                        <Text style = {{fontSize: 18, opacity: .7}}>Category: {item.Category}</Text>
                         <Text style = {{fontSize: 18, opacity: .7}}>Location: {item.Location}</Text>
                         <Text style = {{fontSize: 18, opacity: .7}}>Reported By: {item.ReportedBy}</Text>
                     </View>
@@ -216,7 +219,7 @@ export default function App ({navigation}) {
 
                 </TouchableOpacity>
             )
-
+                
 
 
 
