@@ -195,7 +195,7 @@ export default function App ({navigation}) {
                 opacity,
                 transform: [{scale}]                
                 }}>
-                    <View><Text style = {{fontSize: 22, opacity: .7}}>Hello</Text></View>
+                    
                     <Image
                     
                     source = {item.Picture}
