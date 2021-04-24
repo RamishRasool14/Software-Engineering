@@ -128,7 +128,17 @@ export default function App ({navigation}) {
 
           
 
-        return( <View style = {{flex: 1, backgroundColor : '#fff'}}>
+        return( 
+        <View style = {{flex: 1, backgroundColor : '#fff'}}>
+            <View style = {{marginTop: 40,marginLeft: 70,flexDirection:'row'}} >
+                <TouchableOpacity >
+                <Text style = {{fontSize: 22,fontWeight: 'bold',textDecorationLine: 'underline'}}>Workers</Text>
+                </TouchableOpacity>
+                <TouchableOpacity  onPress = {()=> navigation.navigate('BlacklistClients')}>
+                <Text style = {{fontSize: 22,marginLeft: 130,opacity:0.7,fontWeight: 'bold'}}>Clients</Text>
+                </TouchableOpacity>
+                </View>
+            
             
             
         
@@ -152,6 +162,7 @@ export default function App ({navigation}) {
             paddingTop: StatusBar.currentHeight || 42
         }}
         renderItem = {({item, index}) => {
+            
 
             const inputRange = [
                 -1,
@@ -176,6 +187,7 @@ export default function App ({navigation}) {
                 inputRange: opacityInputRange,
                 outputRange: [1,1,1,0]
             })
+            
 
             return (
                 
@@ -216,7 +228,7 @@ export default function App ({navigation}) {
 
                 </TouchableOpacity>
             )
-
+                
 
 
 
