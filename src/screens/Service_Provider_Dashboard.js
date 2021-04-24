@@ -82,7 +82,7 @@ export default class Home extends React.Component {
                             <Text style={{ fontSize: 11, paddingLeft: 16, marginTop: 9, letterSpacing: 0.075, color: '#2E305F', fontWeight: 'bold' }}>Completed</Text>
                         </SPSmallCard>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('SPPending')}>
+                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('SPPending',this.state.username)}>
                         <SPSmallCard>
                             <PendingOrders style = {styles.PendingOrders}/>
                             <Text style={{ fontSize: 11, paddingLeft: 24, marginTop: 11, letterSpacing: 0.075, color: '#2E305F', fontWeight: 'bold' }}>Pending</Text>

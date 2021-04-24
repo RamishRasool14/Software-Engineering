@@ -64,7 +64,7 @@ return (
           headerTitleStyle: {
             fontWeight: 'bold',
           },
-        }}/>
+        }}/>  
         <Stack.Screen name = "SPReviews" component = {SPReviews} options={{
           title: 'Client Reviews',
           headerStyle: {

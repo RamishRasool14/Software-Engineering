@@ -42,9 +42,9 @@ class AutoExpandingTextInput extends React.Component {
         FinalOrder) 
 
     console.log(FinalOrder)
-    this.textInput1.clear()
-    this.textInput2.clear()
-    this.textInput3.clear()
+    // this.textInput1.clear()
+    // this.textInput2.clear()
+    // this.textInput3.clear()
     
 
 }

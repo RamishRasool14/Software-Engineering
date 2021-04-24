@@ -131,7 +131,8 @@ export default class Home extends React.Component {
           ProfileP: Profile,
           data : {
             ...prevstate.data,
-            ClientName : name
+            ClientName : name,
+            ProfileP: Profile
           }
   
         })
