@@ -61,17 +61,27 @@ return (
         
     </View>
 
-    <View style = {{flexDirection:'row', marginLeft:8, marginTop:8}}>
-
-
-
-                            <ViewProfileCard>
-
-                            </ViewProfileCard>
-
-            
+    <View style = {{flexDirection:'row', marginLeft:20, marginTop:20}}>
+        <View>
+            <Text style={[styles.text, {fontSize: 20}]}>Contact Details</Text>
+        </View>
     </View>
-
+    <View style={{ flexDirection: 'row', marginLeft: 30, marginTop: 10 }}>
+        <View>
+            <Text style={[styles.text, { fontSize: 18 }]}>Email:</Text>
+        </View>
+        <View>
+            <Text style={[styles.text, { fontSize: 18,left:5 }]}>robert341@gmail.com</Text>
+        </View>
+    </View>
+    <View style={{ flexDirection: 'row', marginLeft: 30, marginTop: 10 }}>
+        <View>
+            <Text style={[styles.text, { fontSize: 18 }]}>Phone:</Text>
+        </View>
+        <View>
+            <Text style={[styles.text, { fontSize: 18, left: 5 }]}>+923006029090</Text>
+        </View>
+    </View>
 
     
 
