@@ -123,7 +123,7 @@ export default function App ({navigation}) {
         return( 
         <View style = {{flex: 1, backgroundColor : '#fff'}}>
             <View style = {{marginTop: 40,marginLeft: 70,flexDirection:'row'}} >
-                <TouchableOpacity onPress = {()=> navigation.navigate('ServiceProvidersList')}>
+                <TouchableOpacity onPress = {()=> navigation.navigate('BlacklistWorkers')}>
                 <Text style = {{fontSize: 22,fontWeight: 'bold',opacity:0.7}}>Workers</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
@@ -212,6 +212,7 @@ export default function App ({navigation}) {
                     <View>
                         <Text style = {{fontSize: 22, fontWeight: '700'}}>{item.Name}</Text>
                         <Text style = {{fontSize: 18, opacity: .7}}>Location: {item.Location}</Text>
+                        <Text style = {{fontSize: 18, opacity: .7}}>Reported By: {item.ReportedBy}</Text>
                     </View>
 
                 </Animated.View>
