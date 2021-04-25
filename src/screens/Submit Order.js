@@ -58,7 +58,6 @@ class AutoExpandingTextInput extends React.Component {
         placeholder="Title"
         placeholderTextColor = '#2E305F'
         style={[styles.input1]}
-        ref={input => { this.textInput1 = input }}
         onChangeText = {
           
           (val) => this.setState(prevstate => ({
@@ -81,8 +80,6 @@ class AutoExpandingTextInput extends React.Component {
         multiline={true}
         placeholder="Your Budget"
         placeholderTextColor = '#2E305F'
-        ref={input => { this.textInput2 = input }}
-
         style={[styles.input]}
 
         onChangeText = {
@@ -107,7 +104,6 @@ class AutoExpandingTextInput extends React.Component {
         multiline={true}
         placeholder="Description"
         placeholderTextColor = '#2E305F'
-        ref={input => { this.textInput3 = input }}
 
 
         onChangeText = {

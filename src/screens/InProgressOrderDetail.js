@@ -67,20 +67,22 @@ const DATA = [
     }
 ]
 
+const timestamps = ['','','','','']
 export default function App({route, navigation}){
     const [currentPosition, setcurrentPosition ] = useState(0);
  
     const handlePress = () => {
         if (currentPosition<5){
+            timestamps[currentPosition] = new Date() .toString()
+
+
         setcurrentPosition(currentPosition + 1)
         }
         else
         {
-            console.log('Final Screen Time')
-            
+            navigation.navigate('SPReview', route.params)
         }
-
-    }
+}
     
 return (
 
@@ -100,7 +102,7 @@ return (
                 <View style = {styles.lblContainer}>
                     <Text style = {styles.lblText}>{DATA[position].label}</Text>
                     <Text style = {styles.status}>{DATA[position].Description}</Text>
-                    <Text style = {styles.status}>{DATA[position].time}</Text>
+                    <Text style = {styles.status}>{timestamps[position]}</Text>
                     
 
                 </View>
