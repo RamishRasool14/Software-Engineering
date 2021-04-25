@@ -53,8 +53,9 @@ const styles = StyleSheet.create({
 
     },
     image : {
-      height: 210,
-      borderBottomLeftRadius: 30,
+      height: 180,
+      borderBottomLeftRadius: 15,
+      borderBottomRightRadius: 15,
       backgroundColor: '#2E305F'
   },
     cloud : {
@@ -156,13 +157,13 @@ componentDidMount () {
                 <View style = {{flexDirection:'row'}}>
 
             
-              <Text style = {{fontSize : 28, color: "white" , marginTop: 50,  marginLeft:20}}>{this.state.username} {'\n'}  <Text style = {{fontSize : 18,color: "white", marginLeft:27, marginTop: 0}}>We're glad that you are here!</Text></Text> 
+              <Text style = {{fontSize : 28, color: "white" , marginTop: 60,  marginLeft:20}}>{this.state.username} {'\n'}  <Text style = {{fontSize : 18,color: "white", marginLeft:27, marginTop: 0}}>We're glad that you are here!</Text></Text> 
               <TouchableOpacity onPress = {() => this.props.navigation.navigate('ViewClientProfile', this.state.data)}>
              
               <Image
                     
                     source = {{uri : this.state.ProfileP}}
-                    style = {{width: 65, height: 65, marginTop: 55, marginLeft: 45, borderRadius: 2,
+                    style = {{width: 65, height: 65, marginTop: 65, marginLeft: 45, borderRadius: 2,
                     
                   }}
               />
@@ -173,7 +174,7 @@ componentDidMount () {
                 </View>
 
                       
-              <View style = {styles.container}>
+              {/* <View style = {styles.container}>
 
               <View style = {{marginLeft: 10, marginTop: 12}}>
               <Feather  name = 'search' size = {22} color = '#2E305F'/>
@@ -183,14 +184,14 @@ componentDidMount () {
 
 
 
-              </View>
+              </View> */}
 
                 
             </View>
           
 
 
-                <View style = {{flexDirection:'row', marginTop: 40}}>
+                <View style = {{flexDirection:'row', marginTop: 30}}>
 
                   <TouchableOpacity onPress = {() => this.props.navigation.navigate('CompletedOrders')}>
                     <Card>

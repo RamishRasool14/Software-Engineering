@@ -1,6 +1,7 @@
 import {createAppContainer} from 'react-navigation';
 import React, {Component} from 'react';
-
+import { Ionicons } from '@expo/vector-icons';
+import {styleSheet, Text, View, Image, TouchableOpacity} from 'react-native';
 import Home from '../screens/Home';
 import Detail from '../screens/Categories';
 import CompletedOrders from '../screens/Category People List';
@@ -32,7 +33,62 @@ import SPPendingOrderDetails from "../screens/ViewPendingOrderDetail"
 import SPInProgressOrderDetail from "../screens/InProgressOrderDetail"
 import SPReview from "../screens/SP_Review"
 import SPCompletedDetail from "../screens/SPCompletedOrderDetails"
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 const Stack = createStackNavigator()
+const Tab = createBottomTabNavigator()
+function HomeTabs() {
+  return (
+    <Tab.Navigator
+    tabBarOptions = {{
+      showLabel : false,
+      style : {
+        position : 'absolute',
+        // bottom : 10,
+        // left : 10,
+        // right : 10,
+        backgroundColor : '#2E305F',
+        borderTopLeftRadius : 10,
+        borderTopRightRadius : 10,
+        borderBottomLeftRadius : 0,
+        height : 50
+
+      }
+    }}
+    >
+      <Tab.Screen name="Home" component={Home} options= {{
+        tabBarIcon: ({focused}) => (
+          <View>
+            <Ionicons name="home" size={24} style = {{color : focused ? 'white' : '#899BC9' }} />
+            <Text style = {{color : focused ? 'white' : '#899BC9' , fontSize: 10}}>HOME</Text>
+          </View>
+
+        ),
+      }}/>
+      <Tab.Screen name="Chat" component={Home} options= {{
+        tabBarIcon: ({focused}) => (
+          <View>
+            <Ionicons name="chatbox-ellipses" size={24} style = {{color : focused ? 'white' : '#899BC9' }} />
+            <Text style = {{color : focused ? 'white' : '#899BC9' , fontSize: 10}}>CHAT</Text>
+          </View>
+
+        ),
+      }}/>
+
+
+      <Tab.Screen name="Notifications" component={Home} options= {{
+        tabBarIcon: ({focused}) => (
+          <View>
+            <Ionicons name="notifications" size={24} style = {{color : focused ? 'white' : '#899BC9' }} />
+            <Text style = {{color : focused ? 'white' : '#899BC9' , fontSize: 10}}>ALERTS</Text>
+          </View>
+
+        ),
+      }}/>
+
+    </Tab.Navigator>
+  );
+}
 
 export default function App () {
 
@@ -134,7 +190,7 @@ return (
 
 
 
-           <Stack.Screen name = "Home" component = {Home} options={{ headerShown: false }}/> 
+           <Stack.Screen name = "Home" component = {HomeTabs} options={{ headerShown: false }}/> 
             <Stack.Screen name = "Detail" component = {Detail} options={{
           title: 'Categories',
           headerStyle: {
@@ -218,3 +274,4 @@ return (
 )
 
 }
+

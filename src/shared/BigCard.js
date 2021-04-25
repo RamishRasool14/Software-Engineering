@@ -42,9 +42,7 @@ card : {
 	height: 6,
     },
 shadowOpacity: 0.9,
-shadowRadius: 8.30,
-borderColor: 'black',
-    borderWidth: 0.5,
+
 
 elevation: 8,
 
