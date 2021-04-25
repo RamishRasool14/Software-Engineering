@@ -22,12 +22,12 @@ const AVATAR_SIZE = 90;
 const ITEM_SIZE = AVATAR_SIZE + SPACING*3;
 const BigImage = require('../images/Categories_List/P.jpeg') 
 var data1 = []
-var data2 = []
+// var data2 = []
 var data_emails = []
 export default function App ({route, navigation}) {
 
     // const [DATA, UpdateData]= useState([])
-    // const [data1, Updatedata]= useState([])
+    const [data2, Updatedata]= useState([])
     const processPress = (object) => {
 
         const data = route.params
@@ -81,6 +81,7 @@ export default function App ({route, navigation}) {
                 }
                 data_.push(element)
 
+
             }
             
             
@@ -88,8 +89,8 @@ export default function App ({route, navigation}) {
         // console.log(data2)
         // console.log(data_)
         // data2 = Object.values(data_)
-        data2 = data_
-        console.log(data2)
+        Updatedata(data_)
+        // console.log(data2)
         // DATA = data2
         
     }
@@ -101,27 +102,6 @@ export default function App ({route, navigation}) {
 
         const scrollY = React.useRef( new Animated.Value(0)).current;
 
-        const setTheRating = (Passedrating)=> {
-
-            return (
-                <StarRating
-                
-                disabled={false}
-                emptyStar={'ios-star-outline'}
-                fullStar={'ios-star'}
-                halfStar={'ios-star-half'}
-                iconSet={'Ionicons'}
-                starSize = {15}
-                display={3.67}
-                maxStars={5}
-                rating={Passedrating}
-                fullStarColor={'blue'}
-
-
-        />
-            )
-            
-          }
 
 
           
@@ -142,7 +122,7 @@ export default function App ({route, navigation}) {
         <Animated.FlatList
 
         data = {data2}
-        keyExtractor = {item => item.key}
+        keyExtractor = {(item,index) => index.toString()}
         onScroll = {Animated.event(
             [{nativeEvent: {contentOffset: {y: scrollY}}}],
             {useNativeDriver: true}
