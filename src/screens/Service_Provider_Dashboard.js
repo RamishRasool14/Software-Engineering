@@ -76,7 +76,7 @@ export default class Home extends React.Component {
                     marginLeft: 4,
                     marginTop: 10
                 }}>
-                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('SPCompleted')}>
+                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('SPCompleted', this.state.username)}>
                         <SPSmallCard>
                             <CompletedOrders style = {styles.CompletedOrders}/>
                             <Text style={{ fontSize: 11, paddingLeft: 16, marginTop: 9, letterSpacing: 0.075, color: '#2E305F', fontWeight: 'bold' }}>Completed</Text>

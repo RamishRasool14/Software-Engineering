@@ -18,109 +18,13 @@ class AutoExpandingTextInput extends React.Component {
     };
   }
 
-  processPressAccept(){
-
-    const FinalOrder = this.props.route.params
-
-    
-    firebase
-      .database()
-      .ref('InProgressOrders')
-      .push()
-      .set(FinalOrder)  
-    .then(()=> {
-
-    var KeysOfOrders = []
-    var FinalPath = ''
-    const title = this.props.route.params.OrderDetails.title
-
-
-    firebase.database().ref('Orders').on("value", function(snapshot) {      
-      snapshot.forEach(function(data) {
-        KeysOfOrders.push(data.key)
-      })
-  });
-  console.log(KeysOfOrders)
-  KeysOfOrders.forEach(element => {
-    var PATH = 'Orders/'+element+'/'+'OrderDetails/'+'title'
-    firebase.database().ref(PATH).on("value", function(snapshot) {
-      if(snapshot.val()==title){
-        FinalPath = 'Orders/'+element
-      }
-            
-  });
-});
-
-
-  
-  let userRef = firebase.database().ref(FinalPath);
-  userRef.remove()
-      this.props.navigation.navigate('SPInProgress', this.props.route.params.chosenSP.Name)
-    })
-
-  }
-  processPressDecline(){
-    var KeysOfOrders = []
-    var FinalPath = ''
-    const title = this.props.route.params.OrderDetails.title
-
-
-    firebase.database().ref('Orders').on("value", function(snapshot) {      
-      snapshot.forEach(function(data) {
-        KeysOfOrders.push(data.key)
-      })
-  });
-  console.log(KeysOfOrders)
-  KeysOfOrders.forEach(element => {
-    var PATH = 'Orders/'+element+'/'+'OrderDetails/'+'title'
-    firebase.database().ref(PATH).on("value", function(snapshot) {
-      if(snapshot.val()==title){
-        FinalPath = 'Orders/'+element
-      }
-            
-  });
-});
-
-
-  
-  let userRef = firebase.database().ref(FinalPath);
-  userRef.remove()
-  this.props.navigation.navigate('SPPending')
-
-
-
+  processPress(){
 
   }
 
-  // .orderByChild('name').equalTo('John Doe')
 
-  showAlert1() {  
-    Alert.alert(  
-        'Confirm Order',  
-        'Do you want to accept this order?',  
-        [  
-            {  
-                text: 'Cancel',  
-                style: 'cancel',  
-            },  
-            {text: 'OK', onPress: () => this.processPressAccept()},  
-        ]  
-    );  
-}
- 
-showAlert2() {  
-  Alert.alert(  
-      'Decline Order',  
-      'Are you sure you want to decline?',  
-      [  
-          {  
-              text: 'Cancel',  
-              style: 'cancel',  
-          },  
-          {text: 'OK', onPress: () => this.processPressDecline()},  
-      ]  
-  );  
-}
+
+
  
   render() {
         
@@ -148,12 +52,10 @@ showAlert2() {
         <Text style = {{marginLeft : 16,fontSize: 18, opacity: 0.7, marginTop: 8}}>{this.props.route.params.OrderDetails.description}</Text>
         <Text style = {{marginLeft : 16,fontSize: 18, opacity: 0.7, marginTop: 8, fontWeight: 'bold'}}>Budget: {this.props.route.params.OrderDetails.budget}</Text>
         <Text style = {{marginLeft : 16,fontSize: 18, opacity: 0.7, marginTop: 8, fontWeight: 'bold'}}>Location: DHA Phase 5</Text>
-        <TouchableOpacity style = {styles.button} onPress = {() => this.showAlert1()}>
-          <Text style = {{color: 'white', fontSize: 18,}}>Accept</Text>
+        <TouchableOpacity style = {styles.button} onPress = {() => this.processPress()}>
+          <Text style = {{color: 'white', fontSize: 18,}}>Completed</Text>
         </TouchableOpacity>
-        <TouchableOpacity style = {styles.button2} onPress = {() => this.showAlert2()}>
-          <Text style = {{color: 'white', fontSize: 18, fontWeight: 'bold'}}>Decline</Text>
-        </TouchableOpacity>
+       
 
 
       </Card>
@@ -173,9 +75,10 @@ const styles = StyleSheet.create({
   button : {
 
     padding: 10,
-    borderColor: '#2E305F',
-    backgroundColor: '#2E305F',
-    margin : 20,
+    marginTop : 50,
+    borderColor: 'green',
+    backgroundColor: 'green',
+    // margin : 20,
     marginLeft: 10,
     marginRight: 35,
     borderRadius: 10 ,

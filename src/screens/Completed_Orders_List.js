@@ -22,167 +22,133 @@ const AVATAR_SIZE = 90;
 const ITEM_SIZE = AVATAR_SIZE + SPACING*3;
 const BigImage = require('../images/Categories_List/P.jpeg') 
 
-export default function App ({navigation}) {
+export default function App ({route, navigation}) {
 
     const [DATA, UpdateData]= useState([])
     const processPress = (object) => {
 
     
     }
-
-
-        
-
     const fetchData = () => {
         firebase
             .database()
-            .ref("/users")
+            .ref("/CompletedOrders")
             .on("value", snapshot => {
-                const data = snapshot.val()
-                UpdateData(Object.values(data))
+                if (snapshot.val()!=null){
+                    const data = Object.values(snapshot.val())
+                    const CompletedOrders = []
+                    for (let i = 0; i < data.length; i++) {
+                        const element = data[i];
+                        if (element.chosenSP.Name == route.params){
+                            CompletedOrders.push(element)
+                        }
+                    }
+                        
+                    UpdateData(CompletedOrders) 
+                }
+                else 
+                {
+                    {const CompletedOrders = []
+                    UpdateData(CompletedOrders) }
+                    <Text style = {{fontSize: 16}}> No Orders to show.</Text>
+                }
+                    
+
         })
 
     }
 
-    
-    
     useEffect(() => 
     fetchData(), []);
     
 
-        const scrollY = React.useRef( new Animated.Value(0)).current;
-
-        const setTheRating = (Passedrating)=> {
-
-            return (
-                <StarRating
-                
-                disabled={false}
-                emptyStar={'ios-star-outline'}
-                fullStar={'ios-star'}
-                halfStar={'ios-star-half'}
-                iconSet={'Ionicons'}
-                starSize = {15}
-                display={3.67}
-                maxStars={5}
-                rating={Passedrating}
-                fullStarColor={'blue'}
-
-
-        />
-            )
-            
-          }
-
-
-          
-
-        return( <View style = {{flex: 1, backgroundColor : '#fff'}}> 
-
-
+    const scrollY = React.useRef(new Animated.Value(0)).current;
+    
+    return (<View style={{ flex: 1, backgroundColor: '#fff' }}>
 
         <Animated.FlatList
-
-        data = {DATA}
-        keyExtractor = {item => item.key}
-        onScroll = {Animated.event(
-            [{nativeEvent: {contentOffset: {y: scrollY}}}],
-            {useNativeDriver: true}
-        )
-
-        }
-        contentContainerStyle = {{
-
-
-            padding: SPACING,
-            paddingTop: StatusBar.currentHeight || 42
-        }}
-        renderItem = {({item, index}) => {
-
-            const inputRange = [
-                -1,
-                0,
-                ITEM_SIZE * index,
-                ITEM_SIZE * (index+2),
-
-            ]
-            const opacityInputRange = [
-                -1,
-                0,
-                ITEM_SIZE * index,
-                ITEM_SIZE * (index+0.5),
-
-            ]
-            const scale = scrollY.interpolate({
-                inputRange,
-                outputRange: [1,1,1,0]
-            })
-
-            const opacity = scrollY.interpolate({
-                inputRange: opacityInputRange,
-                outputRange: [1,1,1,0]
-            })
-
-            return (
-
-                <TouchableOpacity onPress = {()=> processPress(item)}>
-                
-                <Animated.View style = {{flexDirection: 'row', padding: SPACING, marginBottom: SPACING, backgroundColor: 'rgba(255,255,255,1)', borderRadius: 12,
-                
-                shadowColor: '#000',
-                shadowOffset: {
-                    width: 0,
-                    height: 10,
-                },
-                shadowOpacity: 0.9,
-                shadowRadius: 20,
-                elevation: 10,
-                opacity,
-                transform: [{scale}]                
-                }}>
-                    <Image
-                    
-                    source = {{uri : item.Picture}}
-                    style = {{width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: AVATAR_SIZE,
-                    
-                        marginRight: SPACING/2
-                    }}
-                    
-                    />
-                    <View>
-                        <Text style = {{fontSize: 22, fontWeight: '700'}}>{item.Name}</Text>
-                        <Text style = {{fontSize: 18, opacity: .7}}>Location: {item.Location}</Text>
-                        <Text style = {{fontSize: 16, opacity: .8}}>Rating: {
-
-                            setTheRating(item.Rating)
-
-
-
-                        }</Text>
-                        <Text style =  {{fontSize: 16, opacity: 1, color: '#1a237e'}}>Cost: {item.Cost}</Text>
-                    </View>
-
-                </Animated.View>
-
-                </TouchableOpacity>
+            data={DATA}
+            keyExtractor={(item, index) => index.toString()}
+            onScroll={Animated.event(
+                [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+                { useNativeDriver: true }
             )
+            }
+            contentContainerStyle={{
+                padding: SPACING,
+                paddingTop: StatusBar.currentHeight || 42
+            }}
+            renderItem={({ item, index }) => {
+                const inputRange = [
+                    -1,
+                    0,
+                    ITEM_SIZE * index,
+                    ITEM_SIZE * (index + 2),
+                ]
+                const opacityInputRange = [
+                    -1,
+                    0,
+                    ITEM_SIZE * index,
+                    ITEM_SIZE * (index + 0.5),
+                ]
+                const scale = scrollY.interpolate({
+                    inputRange,
+                    outputRange: [1, 1, 1, 0]
+                })
+                const opacity = scrollY.interpolate({
+                    inputRange: opacityInputRange,
+                    outputRange: [1, 1, 1, 0]
+                })
+                return (
+                    <TouchableOpacity onPress = {() => navigation.navigate('SPCompletedDetail', item)}>
+                    <Animated.View style={{
+                        key : index,
+                        flexDirection: 'row', padding: SPACING, marginBottom: SPACING, backgroundColor: 'rgba(255,255,255,1)', borderRadius: 12,
+                        shadowColor: '#000',
+                        shadowOffset: {
+                            width: 0,
+                            height: 10,
+                        },
+                        shadowOpacity: 0.9,
+                        shadowRadius: 20,
+                        elevation: 10,
+                       
+                    }}>
+                        <Image
+                            source={{uri : item.ProfileP}}
+                            style={{
+                                width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: AVATAR_SIZE,
+                                marginRight: SPACING / 2
+                            }}
+                        />
+                        <View style={{width: 200}}>
+                            <Text style={{ fontSize: 16, opacity: .8}}>Order Title: {item.OrderDetails.title}</Text>
+                            <Text style={{ fontSize: 16, fontWeight: '700' }}>Client: {item.ClientName}</Text>
+                            <Text style={{ fontSize: 16, opacity: .7 }}>Budget: {item.OrderDetails.budget}</Text>
+                            <Text style={{ fontSize: 16, opacity: .8, fontWeight: '700'}}>Tap to View Details</Text>
+                        </View>
+                    </Animated.View>
+                    </TouchableOpacity>
 
-
-
-
-        }}
-        
-        
-        
-        
+                )
+            }}
         />
-
-
-            
-            </View>
-
-        )
-
+    </View>
+    )
+}
+const styles = StyleSheet.create({
+    backgroundImage: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        position: "absolute",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        zIndex: -1
+    },
+    SPHomeButton: {
+        marginTop: 3.5,
+        marginLeft: 15
     }
-
-
+})

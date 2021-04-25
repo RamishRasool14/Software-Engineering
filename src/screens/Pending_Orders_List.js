@@ -109,7 +109,7 @@ export default function App({ route, navigation }) {
     return (<View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Animated.FlatList
             data={DATA}
-            keyExtractor={item => item.key}
+            keyExtractor={(item, index) => index.toString()}
             onScroll={Animated.event(
                 [{ nativeEvent: { contentOffset: { y: scrollY } } }],
                 { useNativeDriver: true }

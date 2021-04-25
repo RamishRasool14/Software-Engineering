@@ -31,6 +31,7 @@ import ClientsList from "../screens/Clients_list"
 import SPPendingOrderDetails from "../screens/ViewPendingOrderDetail"
 import SPInProgressOrderDetail from "../screens/InProgressOrderDetail"
 import SPReview from "../screens/SP_Review"
+import SPCompletedDetail from "../screens/SPCompletedOrderDetails"
 const Stack = createStackNavigator()
 
 export default function App () {
@@ -69,6 +70,17 @@ return (
             fontWeight: 'bold',
           },
         }}/>
+          <Stack.Screen name = "SPCompletedDetail" component = {SPCompletedDetail} options={{
+          title: 'Order Details',
+          headerStyle: {
+            backgroundColor: '#2E305F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>
+
 
         <Stack.Screen name = "SPPendingOrderDetails" component = {SPPendingOrderDetails} options={{
           title: 'Order Details',
