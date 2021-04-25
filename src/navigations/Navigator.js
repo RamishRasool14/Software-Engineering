@@ -34,9 +34,35 @@ import SPInProgressOrderDetail from "../screens/InProgressOrderDetail"
 import SPReview from "../screens/SP_Review"
 import SPCompletedDetail from "../screens/SPCompletedOrderDetails"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import ChatScreen from "../screens/ChatScreen"
+import Inbox from "../screens/Inbox"
+import ClientInbox from "../screens/ClientInbox"
 
 const Stack = createStackNavigator()
+const InboxNavigator = createStackNavigator()
 const Tab = createBottomTabNavigator()
+const SPTab = createBottomTabNavigator()
+
+const InboxNav = () => {
+return (
+  <InboxNavigator.Navigator initialRouteName = "ClientInbox">
+      <InboxNavigator.Screen name = "ClientInbox" component = {ClientInbox} options={{
+          title: 'Inbox',
+          headerLeft: ()=> null,
+          headerStyle: {
+            backgroundColor: '#2E305F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>
+
+  </InboxNavigator.Navigator>
+)
+}
+
+
 function HomeTabs() {
   return (
     <Tab.Navigator
@@ -65,7 +91,7 @@ function HomeTabs() {
 
         ),
       }}/>
-      <Tab.Screen name="Chat" component={Home} options= {{
+      <Tab.Screen name="Chat" component={InboxNav} options= {{
         tabBarIcon: ({focused}) => (
           <View>
             <Ionicons name="chatbox-ellipses" size={24} style = {{color : focused ? 'white' : '#899BC9' }} />
@@ -84,12 +110,100 @@ function HomeTabs() {
           </View>
 
         ),
+        title: 'Inbox',
+          headerStyle: {
+            backgroundColor: '#2E305F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
       }}/>
 
     </Tab.Navigator>
   );
 }
 
+
+const SPInboxNav = () => {
+  return (
+    <InboxNavigator.Navigator initialRouteName = "Inbox">
+        <InboxNavigator.Screen name = "Inbox" component = {Inbox} options={{
+            title: 'Inbox',
+            headerLeft: ()=> null,
+            headerStyle: {
+              backgroundColor: '#2E305F',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}/>
+  
+    </InboxNavigator.Navigator>
+  )
+  }
+
+function SPHomeTabs() {
+  return (
+    <Tab.Navigator
+    tabBarOptions = {{
+      showLabel : false,
+      style : {
+        position : 'absolute',
+        // bottom : 10,
+        // left : 10,
+        // right : 10,
+        backgroundColor : '#2E305F',
+        borderTopLeftRadius : 10,
+        borderTopRightRadius : 10,
+        borderBottomLeftRadius : 0,
+        height : 50
+
+      }
+    }}
+    >
+      <Tab.Screen name="SPHome" component={SPHome} options= {{
+        tabBarIcon: ({focused}) => (
+          <View>
+            <Ionicons name="home" size={24} style = {{color : focused ? 'white' : '#899BC9' }} />
+            <Text style = {{color : focused ? 'white' : '#899BC9' , fontSize: 10}}>HOME</Text>
+          </View>
+
+        ),
+      }}/>
+      <Tab.Screen name="Chat" component={SPInboxNav} options= {{
+        tabBarIcon: ({focused}) => (
+          <View>
+            <Ionicons name="chatbox-ellipses" size={24} style = {{color : focused ? 'white' : '#899BC9' }} />
+            <Text style = {{color : focused ? 'white' : '#899BC9' , fontSize: 10}}>CHAT</Text>
+          </View>
+
+        ),
+      }}/>
+
+
+      <Tab.Screen name="Notifications" component={SPHome} options= {{
+        tabBarIcon: ({focused}) => (
+          <View>
+            <Ionicons name="notifications" size={24} style = {{color : focused ? 'white' : '#899BC9' }} />
+            <Text style = {{color : focused ? 'white' : '#899BC9' , fontSize: 10}}>ALERTS</Text>
+          </View>
+
+        ),
+        title: 'Inbox',
+          headerStyle: {
+            backgroundColor: '#2E305F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+      }}/>
+
+    </Tab.Navigator>
+  );
+}
 export default function App () {
 
 return (
@@ -104,7 +218,7 @@ return (
         <Stack.Screen name = "SPLogin" component = {SPLogin} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPSignUP" component = {SPSignUP} options={{ headerShown: false }}/>
         <Stack.Screen name = "ForgetPassword" component = {ForgetPassword} options={{ headerShown: false }}/>
-        <Stack.Screen name = "SPHome" component = {SPHome} options={{ headerShown: false }}/>
+        <Stack.Screen name = "SPHome" component = {SPHomeTabs} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPCompleted" component = {SPCompleted} options={{
           title: 'Completed Orders',
           headerStyle: {
@@ -180,6 +294,7 @@ return (
             fontWeight: 'bold',
           },
         }}/>
+        
         <Stack.Screen name = "AdminDashboard" component = {AdminDashboard} options={{ headerShown: false }}/>
         <Stack.Screen name = "Transactions" component = {Transactions} options={{ headerShown: false }}/>
         <Stack.Screen name = "BlacklistWorkers" component = {BlacklistWorkers} options={{ headerShown: false }}/>
