@@ -1,5 +1,6 @@
 import React , { useState }from 'react';
-
+import  { useEffect }from 'react';
+import firebase from './firebase';
 
 
 import Icon from '@expo/vector-icons/MaterialCommunityIcons';
@@ -11,128 +12,118 @@ import {View, Text, Animated,Image,Dimensions ,ImageBackground,TextInput, StyleS
 import { StatusBar } from 'expo-status-bar';
 import StarRating from 'react-native-star-rating';
 
-// firebase.database().ref('users').on('value', (data) => {
-//     console.log(data.toJSON())
-
-
-// })
 
 
 
-const DATA = [
 
-    {
-        key : '1',
-        Name: 'Daniyal Ahmed Khan',
-        Location: 'DHA Phase-5',
-        Picture : require('../images/Categories_List/1.png'),
-        
-        
-    },
-
-    {
-        key : '2',
-        Name: 'Ahsan Iqbal',
-        Location: 'DHA Phase-5',
-        Picture : require('../images/Categories_List/2.png')
-        
-        
-    },
-    {
-        key :'3',
-
-        Name: 'Saad',
-        Location: 'DHA Phase-5',
-        Picture : require('../images/Categories_List/3.png')
-        
-        
-    },
-    {
-        key : '4',
-
-        Name: 'Ramish',
-        Location: 'DHA Phase-5',
-        Picture : require('../images/Categories_List/4.png')
-        
-        
-    },
-    {
-        key: '5' ,
-        Name: 'Imran Khan',
-        Location: 'DHA Phase-5',
-        Picture : require('../images/Categories_List/5.png')
-        
-        
-        
-    },
-    {
-        key: '6' ,
-
-        Name: 'Nawaz Sharif',
-        Location: 'DHA Phase-5',
-        Picture : require('../images/Categories_List/6.png')
-        
-        
-    },
-    {
-        key: '7' ,
-
-        Name: 'Abdul Ghafoor',
-        Location: 'DHA Phase-5',
-        Picture : require('../images/Categories_List/4.png')
-        
-        
-    },
-    {
-        key: '8' ,
-
-        Name: 'Momin',
-        Location: 'DHA Phase-5',
-        Picture : require('../images/Categories_List/6.png')
-        
-        
-    }
-
-
-]
 
 const SPACING = 20;
 const AVATAR_SIZE = 90;
 const ITEM_SIZE = AVATAR_SIZE + SPACING*3;
 const BigImage = require('../images/Categories_List/P.jpeg') 
+var data1 = []
+// var data2 = []
+var data_emails = []
+export default function App ({route, navigation}) {
 
-export default function App ({navigation}) {
+    // const [DATA, UpdateData]= useState([])
+    const [data2, Updatedata]= useState([])
+    const processPress = (object) => {
 
+        const data = route.params
+        data ['chosenSP'] = object
+        // navigation.navigate('ViewProfile', data)
+    
+    }
+    
+
+
+        
+
+    const fetchData = () => {
+
+        firebase
+            .database()
+            .ref("/registeredUsers")
+            .on("value", snapshot => {
+                const var_ = snapshot.val()
+                const var2 = Object.values(var_) 
+                data1 = var2
+                //  console.log(data1)
+                // UpdateData(Object.values(data))
+        })
+        firebase
+        .database()
+        .ref("/users")
+        .on("value", snapshot => {
+            const var1_ = snapshot.val()
+            const var12 = Object.values(var1_) 
+            data_emails = var12
+            //  console.log(data1)
+            // UpdateData(Object.values(data))
+    })
+    var data_ = [];
+    var i;
+    for (i = 0; i < data1.length; i++) {
+        const element = data1[i];
+        // console.log(element)
+        
+        if (element.type == "client") 
+        {
+            // console.log(element)
+            for (let j = 0; j < data_emails.length; j++) {
+                const element1 = data_emails[j];
+                if(element1.email == element.email)
+                {
+                    element["Picture"] = element1.Picture
+                }
+                
+            }
+            data_.push(element)
+
+
+        }
+        
+        
+    }
+
+        // console.log(data2)
+        // console.log(data_)
+        // data2 = Object.values(data_)
+        Updatedata(data_)
+        // console.log(data2)
+        // DATA = data2
+        
+    }
+
+
+    useEffect(() => 
+    fetchData(), []);
     
 
         const scrollY = React.useRef( new Animated.Value(0)).current;
-        // const [rating, setRating] = React.useStatse(0)
 
 
 
           
 
-        return( 
-        <View style = {{flex: 1, backgroundColor : '#fff'}}>
-            <View style = {{marginTop: 40,marginLeft: 70,flexDirection:'row'}} >
+        return( <View style = {{flex: 1, backgroundColor : '#fff'}}>
+            
+             <View style = {{marginTop: 40,marginLeft: 70,flexDirection:'row'}} >
                 <TouchableOpacity onPress = {()=> navigation.navigate('ServiceProvidersList')}>
                 <Text style = {{fontSize: 22,fontWeight: 'bold',opacity:0.7}}>Workers</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
                 <Text style = {{fontSize: 22,marginLeft: 130,fontWeight: 'bold',textDecorationLine: 'underline'}}>Clients</Text>
                 </TouchableOpacity>
-                </View>
-            
-            
-            
-        
+            </View>
 
 
 
         <Animated.FlatList
 
-        data = {DATA}
-        keyExtractor = {item => item.key}
+        data = {data2}
+        keyExtractor = {(item,index) => index.toString()}
         onScroll = {Animated.event(
             [{nativeEvent: {contentOffset: {y: scrollY}}}],
             {useNativeDriver: true}
@@ -146,7 +137,6 @@ export default function App ({navigation}) {
             paddingTop: StatusBar.currentHeight || 42
         }}
         renderItem = {({item, index}) => {
-            
 
             const inputRange = [
                 -1,
@@ -171,12 +161,10 @@ export default function App ({navigation}) {
                 inputRange: opacityInputRange,
                 outputRange: [1,1,1,0]
             })
-            
 
             return (
-                
 
-                <TouchableOpacity >
+                <TouchableOpacity onPress = {()=> processPress(item)}>
                 
                 <Animated.View style = {{flexDirection: 'row', padding: SPACING, marginBottom: SPACING, backgroundColor: 'rgba(255,255,255,1)', borderRadius: 12,
                 
@@ -191,26 +179,28 @@ export default function App ({navigation}) {
                 opacity,
                 transform: [{scale}]                
                 }}>
-                    
                     <Image
                     
-                    source = {item.Picture}
+                    source = {{uri : item.Picture}}
                     style = {{width: AVATAR_SIZE, height: AVATAR_SIZE, borderRadius: AVATAR_SIZE,
                     
                         marginRight: SPACING/2
                     }}
                     
                     />
-                    <View style = {{alignContent: 'center',marginTop: 15}}>
+                    <View>
                         <Text style = {{fontSize: 22, fontWeight: '700'}}>{item.Name}</Text>
-                        <Text style = {{fontSize: 18, opacity: .7}}>Location: {item.Location}</Text>
+                        <Text style = {{fontSize: 18, opacity: .7}}>Email: {item.email}</Text>
+                        <Text style = {{fontSize: 18, opacity: .7}}>Location: {item.location}</Text>
+                        
+                        
                     </View>
 
                 </Animated.View>
 
                 </TouchableOpacity>
             )
-                
+
 
 
 
