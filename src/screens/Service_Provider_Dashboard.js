@@ -88,10 +88,10 @@ export default class Home extends React.Component {
                             <Text style={{ fontSize: 11, paddingLeft: 24, marginTop: 11, letterSpacing: 0.075, color: '#2E305F', fontWeight: 'bold' }}>Pending</Text>
                         </SPSmallCard>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('SPReviews')}>
+                    <TouchableOpacity onPress={()=> this.props.navigation.navigate('SPInProgress', this.state.username)}>
                         <SPSmallCard>
                             <Reviews style = {styles.Reviews}/>
-                            <Text style={{ fontSize: 11, paddingLeft: 24, marginTop: 10, letterSpacing: 0.075, color: '#2E305F', fontWeight: 'bold' }}>Reviews</Text>
+                            <Text style={{ fontSize: 11, paddingLeft: 24, marginTop: 10, letterSpacing: 0.075, color: '#2E305F', fontWeight: 'bold' }}>In Progress</Text>
                         </SPSmallCard>
                     </TouchableOpacity>
                 </View>

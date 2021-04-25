@@ -78,6 +78,7 @@ export default function App({ route, navigation }) {
             .database()
             .ref("/Orders")
             .on("value", snapshot => {
+                if (snapshot.val()!=null){
                 const data = Object.values(snapshot.val())
                 const PendingOrders = []
                 for (let i = 0; i < data.length; i++) {
@@ -86,7 +87,15 @@ export default function App({ route, navigation }) {
                         PendingOrders.push(element)
                     }
                 }
-                UpdateData(PendingOrders)
+                    
+                UpdateData(PendingOrders) 
+            }
+            else 
+            {
+                {const PendingOrders = []
+                UpdateData(PendingOrders) }
+                <Text style = {{fontSize: 16}}> No Orders to show.</Text>
+            }
                 
         })
 
@@ -100,7 +109,7 @@ export default function App({ route, navigation }) {
     return (<View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Animated.FlatList
             data={DATA}
-            keyExtractor={item => 'Hammad'}
+            keyExtractor={item => item.key}
             onScroll={Animated.event(
                 [{ nativeEvent: { contentOffset: { y: scrollY } } }],
                 { useNativeDriver: true }

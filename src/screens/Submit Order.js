@@ -9,9 +9,6 @@ class AutoExpandingTextInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {text: '', height: 0, OrderDetails : {} };
-    this.textInput1 = '';
-    this.textInput2 = '';
-    this.textInput3 = '';
   }
 
   showAlert1() {  
@@ -30,9 +27,9 @@ class AutoExpandingTextInput extends React.Component {
 }
   processPress (){
 
-    console.log()
-    const FinalOrder = this.props.route.params
+    var FinalOrder = this.props.route.params
     FinalOrder ['OrderDetails'] = this.state.OrderDetails
+    FinalOrder ['key'] = new Date().toString()
 
     firebase
       .database()
@@ -41,10 +38,6 @@ class AutoExpandingTextInput extends React.Component {
       .set(
         FinalOrder) 
 
-    console.log(FinalOrder)
-    // this.textInput1.clear()
-    // this.textInput2.clear()
-    // this.textInput3.clear()
     
 
 }

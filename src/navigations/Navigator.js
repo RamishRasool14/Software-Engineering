@@ -80,8 +80,8 @@ return (
             fontWeight: 'bold',
           },
         }}/>  
-        <Stack.Screen name = "SPReviews" component = {SPReviews} options={{
-          title: 'Client Reviews',
+        <Stack.Screen name = "SPInProgress" component = {SPReviews} options={{
+          title: 'In Progress Orders',
           headerStyle: {
             backgroundColor: '#2E305F',
           },

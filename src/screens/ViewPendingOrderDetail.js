@@ -4,6 +4,7 @@ import SubmitOrderSvg from "../Icons/SubmitOrderSvg";
 import firebase from './firebase'
 import {Ionicons, MaterialIcons} from '@expo/vector-icons'
 import Card from '../shared/SPIcons/titleCard'
+import { cos } from "react-native-reanimated";
 class AutoExpandingTextInput extends React.Component {
 
 
@@ -19,14 +20,79 @@ class AutoExpandingTextInput extends React.Component {
 
   processPressAccept(){
 
-    console.log('Accepted')
+    const FinalOrder = this.props.route.params
+
+    
+    firebase
+      .database()
+      .ref('InProgressOrders')
+      .push()
+      .set(FinalOrder)
+    .then(()=> {
+
+      var KeysOfOrders = []
+    var FinalPath = ''
+    const title = this.props.route.params.OrderDetails.title
+
+
+    firebase.database().ref('Orders').on("value", function(snapshot) {      
+      snapshot.forEach(function(data) {
+        KeysOfOrders.push(data.key)
+      })
+  });
+  console.log(KeysOfOrders)
+  KeysOfOrders.forEach(element => {
+    var PATH = 'Orders/'+element+'/'+'OrderDetails/'+'title'
+    firebase.database().ref(PATH).on("value", function(snapshot) {
+      if(snapshot.val()==title){
+        FinalPath = 'Orders/'+element
+      }
+            
+  });
+});
+
+
+  
+  let userRef = firebase.database().ref(FinalPath);
+  userRef.remove()
+      this.props.navigation.navigate('SPInProgress', this.props.route.params.chosenSP.Name)
+    })
 
   }
-  processPressDecine(){
+  processPressDecline(){
+    var KeysOfOrders = []
+    var FinalPath = ''
+    const title = this.props.route.params.OrderDetails.title
 
-    console.log('Decline')
+
+    firebase.database().ref('Orders').on("value", function(snapshot) {      
+      snapshot.forEach(function(data) {
+        KeysOfOrders.push(data.key)
+      })
+  });
+  console.log(KeysOfOrders)
+  KeysOfOrders.forEach(element => {
+    var PATH = 'Orders/'+element+'/'+'OrderDetails/'+'title'
+    firebase.database().ref(PATH).on("value", function(snapshot) {
+      if(snapshot.val()==title){
+        FinalPath = 'Orders/'+element
+      }
+            
+  });
+});
+
+
+  
+  let userRef = firebase.database().ref(FinalPath);
+  userRef.remove()
+  this.props.navigation.navigate('SPPending')
+
+
+
 
   }
+
+  // .orderByChild('name').equalTo('John Doe')
 
   showAlert1() {  
     Alert.alert(  
@@ -51,7 +117,7 @@ showAlert2() {
               text: 'Cancel',  
               style: 'cancel',  
           },  
-          {text: 'OK', onPress: () => this.processPressDecine()},  
+          {text: 'OK', onPress: () => this.processPressDecline()},  
       ]  
   );  
 }
@@ -80,7 +146,7 @@ showAlert2() {
 
         <Text style = {{marginTop: 20 , marginLeft : 16,fontSize: 24, fontWeight : 'bold',}}>{this.props.route.params.OrderDetails.title}</Text>
         <Text style = {{marginLeft : 16,fontSize: 18, opacity: 0.7, marginTop: 8}}>{this.props.route.params.OrderDetails.description}</Text>
-        <Text style = {{marginLeft : 16,fontSize: 18, opacity: 0.7, marginTop: 8, fontWeight: 'bold'}}>Budget: PKR {this.props.route.params.OrderDetails.budget}</Text>
+        <Text style = {{marginLeft : 16,fontSize: 18, opacity: 0.7, marginTop: 8, fontWeight: 'bold'}}>Budget: {this.props.route.params.OrderDetails.budget}</Text>
         <Text style = {{marginLeft : 16,fontSize: 18, opacity: 0.7, marginTop: 8, fontWeight: 'bold'}}>Location: DHA Phase 5</Text>
         <TouchableOpacity style = {styles.button} onPress = {() => this.showAlert1()}>
           <Text style = {{color: 'white', fontSize: 18,}}>Accept</Text>
