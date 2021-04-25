@@ -78,22 +78,21 @@ export default function App({ route,  navigation }) {
             .ref("/InProgressOrders")
             .on("value", snapshot => {
                 if (snapshot.val()!=null){
-                    console.log(snapshot.val())
                 const data = Object.values(snapshot.val())
-                const PendingOrders = []
+                const InProcessOrders = []
                 for (let i = 0; i < data.length; i++) {
                     const element = data[i];
                     if (element.chosenSP.Name == route.params){
-                        PendingOrders.push(element)
+                        InProcessOrders.push(element)
                     }
                 }
                     
-                UpdateData(PendingOrders) 
+                UpdateData(InProcessOrders) 
             }
             else 
             {
-                {const PendingOrders = []
-                UpdateData(PendingOrders) }
+                {const InProcessOrders = []
+                UpdateData(InProcessOrders) }
                 <Text style = {{fontSize: 16}}> No Orders to show.</Text>
             }
                 
@@ -140,7 +139,7 @@ export default function App({ route,  navigation }) {
                     outputRange: [1, 1, 1, 0]
                 })
                 return (
-                    <TouchableOpacity onPress = {() => navigation.navigate('SPPendingOrderDetails', item)}>
+                    <TouchableOpacity onPress = {() => navigation.navigate('SPInProgressOrderDetail', item)}>
                     <Animated.View style={{
                         key : index,
                         flexDirection: 'row', padding: SPACING, marginBottom: SPACING, backgroundColor: 'rgba(255,255,255,1)', borderRadius: 12,

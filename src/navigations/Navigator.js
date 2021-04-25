@@ -6,7 +6,7 @@ import Detail from '../screens/Categories';
 import CompletedOrders from '../screens/Category People List';
 import ViewProfile from '../screens/View Profile';
 import ViewClientProfile from '../screens/ViewClientProfile';
-import Reviews from '../screens/Reviews_List';
+import Reviews from '../screens/SPInProgressOrdersList';
 import DetailsOfServiceProvider from '../screens/DetailsSP';
 import {NavigationContainer} from "@react-navigation/native"
 import {createStackNavigator} from "@react-navigation/stack"
@@ -21,7 +21,7 @@ import ForgetPassword from '../screens/ForgetPassword'
 import SPHome from "../screens/Service_Provider_Dashboard";
 import SPCompleted from "../screens/Completed_Orders_List";
 import SPPending from "../screens/Pending_Orders_List";
-import SPReviews from "../screens/Reviews_List";
+import SPReviews from "../screens/SPInProgressOrdersList";
 import AdminDashboard from "../screens/Admin_Dashboard";
 import Transactions from "../screens/Transaction";
 import BlacklistWorkers from "../screens/Blacklist_Workers";
@@ -29,7 +29,7 @@ import BlacklistClients from "../screens/Blacklist_Clients";
 import ServiceProvidersList from "../screens/ServiceProviders_list"
 import ClientsList from "../screens/Clients_list"
 import SPPendingOrderDetails from "../screens/ViewPendingOrderDetail"
-
+import SPInProgressOrderDetail from "../screens/InProgressOrderDetail"
 
 const Stack = createStackNavigator()
 
@@ -69,6 +69,17 @@ return (
             fontWeight: 'bold',
           },
         }}/>
+
+        <Stack.Screen name = "SPInProgressOrderDetail" component = {SPInProgressOrderDetail} options={{
+          title: 'Order Progress',
+          headerStyle: {
+            backgroundColor: '#2E305F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>  
 
         <Stack.Screen name = "SPPending" component = {SPPending} options={{
           title: 'Pending Orders',
