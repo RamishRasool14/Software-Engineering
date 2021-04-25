@@ -5,25 +5,21 @@ import firebase from './firebase'
 import {Ionicons, MaterialIcons} from '@expo/vector-icons'
 import Card from '../shared/SPIcons/titleCard'
 import { cos } from "react-native-reanimated";
-export default function App({ route,  navigation })  {
+
+export default function App({route, navigation}){
+ 
 
 
-    
+return (
 
-  render() {
-        
-    return (
 
-      <SafeAreaView>{console.log(this.props.route.params)}</SafeAreaView>
-
-      
-    );
-  }
-}
+    <SafeAreaView> 
 
 
 
-const styles = StyleSheet.create({
+    </SafeAreaView>    
 
-});
+
+
+)}
 
