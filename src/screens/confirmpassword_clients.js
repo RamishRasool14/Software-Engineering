@@ -77,7 +77,7 @@ export default class ClientLogin extends Component {
               value={this.state.confirmPassword}
               />  
             <TouchableOpacity style={styles.button}
-            onPress = {this.actionsfun.bind(this)}>
+            onPress={() => this.props.navigation.navigate('SPLogin')}>
              <Text style={styles.buttonText}>Confirm</Text>
             </TouchableOpacity>
             
