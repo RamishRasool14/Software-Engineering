@@ -37,7 +37,7 @@ return (
                         <Image source={{uri : picture}} style={styles.image} resizeMode="center"></Image>
                     </View>
 
-                    <TouchableOpacity  style={styles.dm}> 
+                    <TouchableOpacity  style={styles.dm} onPress = {()=> navigation.navigate('ChatWithSP' ,{Reciever: name , Sender : route.params.ClientName} )}> 
                     <View>
                         <MaterialIcons name="chat" size={18} color="#DFD8C8"></MaterialIcons>
                     </View>

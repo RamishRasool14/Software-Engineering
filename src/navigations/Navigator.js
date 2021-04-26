@@ -39,6 +39,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ChatScreen from "../screens/ChatScreen"
 import Inbox from "../screens/Inbox"
 import ClientInbox from "../screens/ClientInbox"
+import ChatWithSP from "../screens/ChatScreen.js"
+import ChatWithClient from "../screens/SPChatScreen"
 
 
 import BlacklistDetails from "../screens/Blacklist_accept"
@@ -128,12 +130,10 @@ function HomeTabs() {
     </Tab.Navigator>
   );
 }
-
-
 const SPInboxNav = () => {
   return (
     <InboxNavigator.Navigator initialRouteName = "Inbox">
-        <InboxNavigator.Screen name = "Inbox" component = {Inbox} options={{
+      <InboxNavigator.Screen name = "Inbox" component = {Inbox} options={{
             title: 'Inbox',
             headerLeft: ()=> null,
             headerStyle: {
@@ -144,7 +144,7 @@ const SPInboxNav = () => {
               fontWeight: 'bold',
             },
           }}/>
-  
+        
     </InboxNavigator.Navigator>
   )
   }
@@ -254,6 +254,30 @@ return (
         }}/>
           <Stack.Screen name = "SPCompletedDetail" component = {SPCompletedDetail} options={{
           title: 'Order Details',
+          headerStyle: {
+            backgroundColor: '#2E305F',
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+        }}/>
+
+
+           <Stack.Screen name = "ChatWithClient" component = {ChatWithClient} options={{
+            title: 'Chat with Client',
+            headerLeft: ()=> null,
+            headerStyle: {
+              backgroundColor: '#2E305F',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}/>
+  
+         <Stack.Screen name = "ChatWithSP" component = {ChatWithSP} options={{
+          title: 'Chat with Service Provider',
           headerStyle: {
             backgroundColor: '#2E305F',
           },

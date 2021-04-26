@@ -10,33 +10,35 @@ import Reviews from "../Icons/Reviews";
 
 
 export default function App({route, navigation}){
+    const PassedObject = route.params
+    const name = "Robert Williamson"
+    const picture = "https://firebasestorage.googleapis.com/v0/b/se-project-81a89.appspot.com/o/Home_PP1.png?alt=media&token=8e8367c1-b07b-45b1-8957-29c280dade95"
+
+    const processPress = () => {
+
+    
+    }
+
+
 
 return (
+
 
     <SafeAreaView style = {styles.container}> 
 
     <ScrollView showsVerticalScrollIndicator = {false}> 
     
-    {/* <View style={styles.titleBar}>
-                    <TouchableOpacity onPress={() => navigation.goBack()}>
-                    <Ionicons name="ios-arrow-back" size={30} color="#52575D"></Ionicons>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity>
-                    <Ionicons name="md-menu" size={30} color="#52575D"></Ionicons>
-                    </TouchableOpacity>
-    </View> */}
 
     <View style={{ alignSelf: "center" }}>
                     <View style={styles.profileImage}>
-                        <Image source={require("../images/Home_PP1.png")} style={styles.image} resizeMode="center"></Image>
+                        <Image source={{uri : picture}} style={styles.image} resizeMode="center"></Image>
                     </View>
 
-                    {/* <TouchableOpacity  style={styles.dm}> 
+                    <TouchableOpacity  style={styles.dm} onPress = {()=> navigation.navigate('ChatWithSP' ,{Reciever: name , Sender : route.params.ClientName} )}> 
                     <View>
                         <MaterialIcons name="chat" size={18} color="#DFD8C8"></MaterialIcons>
                     </View>
-                    </TouchableOpacity> */}
+                    </TouchableOpacity>
                     <View style={styles.active}></View>
                     {/* <View style={styles.add}>
                         <Ionicons name="ios-add" size={35} color="#DFD8C8" style={{ marginTop: 2, marginLeft: 3 }}></Ionicons>
@@ -46,7 +48,7 @@ return (
     </View>
 
     <View style={styles.infoContainer}>
-        <Text style={[styles.text, { fontWeight: "200", fontSize: 30 }]}>{route.params.ClientName}</Text>
+        <Text style={[styles.text, { fontWeight: "200", fontSize: 35 }]}>{name}</Text>
     </View>
 
     <View style={styles.statsContainer}>
@@ -61,29 +63,63 @@ return (
         
     </View>
 
-    <View style = {{flexDirection:'row', marginLeft:20, marginTop:20}}>
-        <View>
-            <Text style={[styles.text, {fontSize: 20}]}>Contact Details</Text>
-        </View>
-    </View>
-    <View style={{ flexDirection: 'row', marginLeft: 30, marginTop: 10 }}>
-        <View>
-            <Text style={[styles.text, { fontSize: 18 }]}>Email:</Text>
-        </View>
-        <View>
-            <Text style={[styles.text, { fontSize: 18,left:5 }]}>robert341@gmail.com</Text>
-        </View>
-    </View>
-    <View style={{ flexDirection: 'row', marginLeft: 30, marginTop: 10 }}>
-        <View>
-            <Text style={[styles.text, { fontSize: 18 }]}>Phone:</Text>
-        </View>
-        <View>
-            <Text style={[styles.text, { fontSize: 18, left: 5 }]}>+923006029090</Text>
-        </View>
+    <View style = {{flexDirection:'row', marginLeft:8, marginTop:8}}>
+
+
+            <TouchableOpacity >
+
+                            <ViewProfileCard>
+                                <Complaints  style = {{marginTop: 13, marginLeft: 40}}/>
+            <Text style={[styles.Profiletext, styles.ProfilesubText] }>Details</Text>
+
+                            </ViewProfileCard>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress = {() => navigation.navigate('Reviews')}>
+
+                            <ViewProfileCard>
+                            <Reviews  style = {{marginTop: 19, marginLeft: 40}}/>
+            <Text style={[styles.Profiletext, styles.ProfilesubTextR] }>Reviews</Text>
+
+
+                            </ViewProfileCard>
+            </TouchableOpacity>
     </View>
 
-    
+
+    <View style = {{flexDirection:'row', marginLeft:8, marginTop:8}}>
+
+
+            <TouchableOpacity>
+
+                            <ViewProfileCard>
+                            <Faqs style = {{marginTop: 13, marginLeft: 30}}/>
+            <Text style={[styles.Profiletext, styles.ProfilesubTextS] } >FAQs</Text>
+
+
+                            </ViewProfileCard>
+            </TouchableOpacity> 
+
+
+            
+
+            <TouchableOpacity onPress = {() => processPress()}>
+                        
+            <BookNow >
+
+            <Text style={[styles.Profiletext, styles.ProfilesubTextB] } >Edit</Text>
+
+
+            </BookNow>
+
+            </TouchableOpacity> 
+
+
+
+
+            {/* </Button> */}
+    </View>
+
 
 
     
@@ -185,11 +221,11 @@ const styles = StyleSheet.create({
 
     },
     ProfilesubTextB: {
-        fontSize: 17,
+        fontSize: 20,
         color: "#ffff",
         textTransform: "uppercase",
         // fontWeight: 'bold',
-        marginLeft:24,
+        marginLeft:38,
         marginTop:32,
 
 
@@ -220,7 +256,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#34FFB9",
         position: "absolute",
         bottom: 28,
-        left: 15,
+        left: 20,
         padding: 4,
         height: 20,
         width: 20,

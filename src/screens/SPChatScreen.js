@@ -7,53 +7,36 @@ import firebase from "./firebase"
 const ChatScreen = ({route , navigation}) => {
 
   const [messages, setMessages] = useState([]);
-  const [ReceiverName, setReceiverName] = useState(route.params.Reciever);
-  const [Sendername, setSendername] = useState(route.params.Sender);
-  // console.log(route.params)
+  const [ReceiverName, setReceiverName] = useState(Object.values(route.params)[0].receiver);
+  const [Sendername, setSendername] = useState(Object.values(route.params)[0].sender);
+  const [previousMessages,setpreviousMessages] = useState(Object.values(route.params))
 
-  useEffect(() => {
-    let AllMessages = []
-    firebase
-      .database()
-      .ref("/Chat/Robert Williamson")
-      .on("value", snapshot => {
 
-            const MessageKeys = Object.keys(snapshot.val())
-            const Messagecontents = Object.values(snapshot.val())
-            
-
+  useEffect(() => {    
       const FormattedMessages = []
 
 
-      Messagecontents.forEach((element,index) => {
-          let container = {}
-          
-          container ['_id'] = element['_id']
-          container ['text'] = element['text']
-          container ['createdAt'] = new Date()
-          container ['user'] = element['user']
-          container.user["_id"] = element['_id']+'++1'
-          container.user["name"] = element.sender
-          container.user["avatar"] = 'https://placeimg.com/140/140/any'
-  
-          FormattedMessages.push(container)
-  
-  
-      });
-      console.log(FormattedMessages)
-  
-      setMessages(FormattedMessages.reverse());
-    
-  })
+    previousMessages.forEach((element,index) => {
+        let container = {}
+        
+        container ['_id'] = element['_id']
+        container ['text'] = element['text']
+        container ['createdAt'] = new Date()
+        container ['user'] = element['user']
+        container.user["_id"] = element['_id']+'++1'
+        container.user["name"] = element.sender
+        container.user["avatar"] = 'https://placeimg.com/140/140/any'
 
+        FormattedMessages.push(container)
+
+
+    });
+
+    setMessages(FormattedMessages.reverse());
   }, []);
 
   const SendToDatabase = (MessagePayload) => {
-
-    console.log(MessagePayload)
-
-
-      var Path = 'Chat/'+MessagePayload.receiver+'/'
+      var Path = 'Chat/'+MessagePayload.sender+'/'
       firebase
       .database()
       .ref(Path)
@@ -64,11 +47,11 @@ const ChatScreen = ({route , navigation}) => {
 
   const onSend = useCallback((messages = []) => {
     
-    console.log(messages)
     var MessagePayload = messages[0]
+    // console.log(route.params)
     MessagePayload['sender'] = Sendername
     MessagePayload['receiver'] = ReceiverName
-    MessagePayload['createdAt'] = new Date().toString()
+    console.log(MessagePayload)
 
     SendToDatabase(MessagePayload)
 
