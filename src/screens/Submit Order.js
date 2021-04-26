@@ -38,6 +38,8 @@ class AutoExpandingTextInput extends React.Component {
       .set(
         FinalOrder) 
 
+      this.props.navigation.navigate('Home')
+
     
 
 }
