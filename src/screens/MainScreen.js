@@ -58,7 +58,7 @@ export default class MainScreen extends Component {
 
                 <View style = {{flexDirection:'row',marginLeft:70}}>
               
-                <Text style = {{fontSize:12,textShadowColor:'rgba(255, 255,255,0.5)',textShadowOffset:{width: 0, height: 1},textShadowRadius: 5,marginTop : 25,letterSpacing: 0.75,color: '#000000'}}>Sign In as admin?</Text>                     
+                <Text style = {{fontSize:12,textShadowColor:'rgba(255, 255,255,0.5)',textShadowOffset:{width: 0, height: 1},textShadowRadius: 5,marginTop : 25,letterSpacing: 0.75,color: '#000000'}}>Sign In as admin?  </Text>                     
                 <TouchableOpacity onPress = {() => this.props.navigation.navigate('AdminLogin')}>
                 <Text style = {{fontSize:12,textShadowColor:'rgba(255, 255,255,0.5)',textShadowOffset:{width: 0, height: 1},textShadowRadius: 5,marginTop : 25,letterSpacing: 0.75,color: '#000000',fontWeight: 'bold' }}>Sign In</Text>                    
 
