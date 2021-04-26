@@ -30,9 +30,11 @@ export default function App ({route, navigation}) {
     const [data2, Updatedata]= useState([])
     const processPress = (object) => {
 
-        const data = route.params
-        data ['chosenSP'] = object
-        // navigation.navigate('ViewProfile', data)
+        // const data = route.params
+        // data ['chosenSP'] = object
+        console.log(object)
+
+        navigation.navigate('BlacklistDetails',{email:object.email,description:object.description,ReportedBy:object.ReportedBy,type:object.type})
     
     }
     
@@ -62,6 +64,7 @@ export default function App ({route, navigation}) {
             //  console.log(data1)
             // UpdateData(Object.values(data))
     })
+    
         var data_ = [];
         var i;
         for (i = 0; i < data1.length; i++) {

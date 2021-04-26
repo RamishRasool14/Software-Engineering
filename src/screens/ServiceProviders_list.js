@@ -28,13 +28,13 @@ export default function App ({route, navigation}) {
 
     // const [DATA, UpdateData]= useState([])
     const [data2, Updatedata]= useState([])
-    const processPress = (object) => {
+    // const processPress = (object) => {
 
-        const data = route.params
-        data ['chosenSP'] = object
-        // navigation.navigate('ViewProfile', data)
+    //     const data = route.params
+    //     data ['chosenSP'] = object
+    //     // navigation.navigate('ViewProfile', data)
     
-    }
+    // }
     
 
 

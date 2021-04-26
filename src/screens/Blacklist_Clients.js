@@ -30,9 +30,11 @@ export default function App ({route, navigation}) {
     const [data2, Updatedata]= useState([])
     const processPress = (object) => {
 
-        const data = route.params
-        data ['chosenSP'] = object
-        // navigation.navigate('ViewProfile', data)
+        // const data = route.params
+        // data ['chosenSP'] = object
+        // console.log(object)
+        navigation.navigate('BlacklistDetails',{email:object.email,description:object.description,ReportedBy:object.ReportedBy,type:object.type})
+        
     
     }
     

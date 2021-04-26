@@ -33,8 +33,12 @@ import SPPendingOrderDetails from "../screens/ViewPendingOrderDetail"
 import SPInProgressOrderDetail from "../screens/InProgressOrderDetail"
 import SPReview from "../screens/SP_Review"
 import SPCompletedDetail from "../screens/SPCompletedOrderDetails"
+<<<<<<< Updated upstream
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+=======
+import BlacklistDetails from "../screens/Blacklist_accept"
+>>>>>>> Stashed changes
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 function HomeTabs() {
@@ -186,6 +190,7 @@ return (
         <Stack.Screen name = "BlacklistClients" component = {BlacklistClients} options={{ headerShown: false }}/>
         <Stack.Screen name = "ServiceProvidersList" component = {ServiceProvidersList} options={{ headerShown: false }}/>
         <Stack.Screen name = "ClientsList" component = {ClientsList} options={{ headerShown: false }}/>
+        <Stack.Screen name = "BlacklistDetails" component = {BlacklistDetails} options={{ headerShown: false }}/>
         
 
 
