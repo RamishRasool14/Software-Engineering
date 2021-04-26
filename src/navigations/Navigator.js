@@ -222,11 +222,9 @@ return (
         <Stack.Screen name = "ClientLogin" component = {ClientLogin} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPLogin" component = {SPLogin} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPSignUP" component = {SPSignUP} options={{ headerShown: false }}/>
-        {/* <Stack.Screen name = "ForgetPassword" component = {ForgetPassword} options={{ headerShown: false }}/> */}
         <Stack.Screen name = "SPHome" component = {SPHomeTabs} options={{ headerShown: false }}/>
         <Stack.Screen name = "ForgetPasswordClient" component = {ForgetPasswordClient} options={{ headerShown: false }}/>
         <Stack.Screen name = "ForgetPasswordSP" component = {ForgetPasswordSP} options={{ headerShown: false }}/>
-        {/* <Stack.Screen name = "SPHome" component = {SPHome} options={{ headerShown: false }}/> */}
         <Stack.Screen name = "ConfirmPassClient" component = {ConfirmPassClient} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPCompleted" component = {SPCompleted} options={{
           title: 'Completed Orders',
