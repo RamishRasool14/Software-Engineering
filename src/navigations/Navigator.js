@@ -42,7 +42,7 @@ import ClientInbox from "../screens/ClientInbox"
 import ChatWithSP from "../screens/ChatScreen.js"
 import ChatWithClient from "../screens/SPChatScreen"
 import AdminLogin from "../screens/Admin_Login"
-
+import ViewSPProfile from "../screens/ViewSPProfile"
 
 import BlacklistDetails from "../screens/Blacklist_accept"
 
@@ -381,6 +381,18 @@ return (
                     fontWeight: 'bold',
                   },
                 }} />
+
+<Stack.Screen name = "ViewSPProfile" component = {ViewSPProfile} options={{
+                  title: 'My Profile',
+                  headerStyle: {
+                    backgroundColor: '#2E305F',
+                  },
+                  headerTintColor: '#fff',
+                  headerTitleStyle: {
+                    fontWeight: 'bold',
+                  },
+                }} />
+
 
 
 

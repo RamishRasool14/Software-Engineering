@@ -55,7 +55,7 @@ export default class Home extends React.Component {
 
             
               <Text style = {{fontSize : 28, color: "white" , marginTop: 55,  marginLeft:30}}>{this.state.username} {'\n'}  <Text style = {{fontSize : 18,color: "white", marginTop: 0}}>It's time to make money</Text></Text> 
-              <TouchableOpacity onPress = {() => this.props.navigation.navigate('ViewClientProfile', this.state.data)}>
+              <TouchableOpacity onPress = {() => this.props.navigation.navigate('ViewSPProfile', this.state.data)}>
              
               <Image
                     
