@@ -10,7 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 import SignupSVG from '../Icons/SignupSVG'
-import {Picker} from '@react-native-community/picker';
+import {Picker} from '@react-native-picker/picker';
 import firebase from './firebase';
 
 

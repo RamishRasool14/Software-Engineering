@@ -21,13 +21,15 @@ const SPACING = 20;
 const AVATAR_SIZE = 90;
 const ITEM_SIZE = AVATAR_SIZE + SPACING*3;
 const BigImage = require('../images/Categories_List/P.jpeg') 
-var data1 = []
+// var data1 = []
 // var data2 = []
 var data_emails = []
 export default function App ({route, navigation}) {
 
     // const [DATA, UpdateData]= useState([])
     const [data2, Updatedata]= useState([])
+    const [data1, UpdateData]= useState([])
+    const [data_emails, UpdateData1]= useState([])
     const processPress = (object) => {
 
         // const data = route.params
@@ -49,8 +51,8 @@ export default function App ({route, navigation}) {
             .ref("/blacklisted_users")
             .on("value", snapshot => {
                 const var_ = snapshot.val()
-                const var2 = Object.values(var_) 
-                data1 = var2
+                // const var2 = Object.values(var_) 
+                UpdateData(Object.values(var_))
                 //  console.log(data1)
                 // UpdateData(Object.values(data))
         })
@@ -59,8 +61,8 @@ export default function App ({route, navigation}) {
         .ref("/users")
         .on("value", snapshot => {
             const var1_ = snapshot.val()
-            const var12 = Object.values(var1_) 
-            data_emails = var12
+            // const var12 = Object.values(var1_) 
+            UpdateData1(Object.values(var1_))
             //  console.log(data1)
             // UpdateData(Object.values(data))
     })

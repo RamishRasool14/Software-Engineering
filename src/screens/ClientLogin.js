@@ -21,20 +21,51 @@ export default class ClientLogin extends Component {
 
 
     };
+    this.data_black = []
   }
   actionsfun()
   {
 
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then((response) => {
-        this.props.navigation.navigate('Home')  
-         
-      })
-      .catch(error => {
-          alert(error)
-      })
+    if(this.state.password != "" && this.state.email != "")
+    {
+      firebase
+        .database()
+        .ref("/per_blacklist")
+        .on("value", snapshot => {
+            const data = snapshot.val()
+            this.data_black = Object.values(data)})
+      
+      for (let i = 0; i < this.data_black.length; i++) {
+        const element = this.data_black[i];
+        if(element.email != this.state.email)
+        {
+          firebase
+          .auth()
+          .signInWithEmailAndPassword(this.state.email, this.state.password)
+          .then((response) => {
+            this.props.navigation.navigate('Home')  
+            
+          })
+          .catch(error => {
+              alert(error)
+          })
+        }
+        else{
+          alert("User is blacklisted by the admin.")
+          return;
+        }
+        
+      }
+        
+      
+
+
+      }
+      else{
+        alert("Make sure all fields are filled.")
+        return;
+      }
+
    
   }
 
