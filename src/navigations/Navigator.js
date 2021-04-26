@@ -41,6 +41,7 @@ import Inbox from "../screens/Inbox"
 import ClientInbox from "../screens/ClientInbox"
 import ChatWithSP from "../screens/ChatScreen.js"
 import ChatWithClient from "../screens/SPChatScreen"
+import AdminLogin from "../screens/Admin_Login"
 
 
 import BlacklistDetails from "../screens/Blacklist_accept"
@@ -226,6 +227,7 @@ return (
         <Stack.Screen name = "ForgetPasswordClient" component = {ForgetPasswordClient} options={{ headerShown: false }}/>
         <Stack.Screen name = "ForgetPasswordSP" component = {ForgetPasswordSP} options={{ headerShown: false }}/>
         <Stack.Screen name = "ConfirmPassClient" component = {ConfirmPassClient} options={{ headerShown: false }}/>
+        <Stack.Screen name = "AdminLogin" component = {AdminLogin} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPCompleted" component = {SPCompleted} options={{
           title: 'Completed Orders',
           headerStyle: {

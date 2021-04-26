@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
   	fontSize:16
   },
   signupButton: {
-  	color:'#7963FF',
+  	color:'#2E305F',
   	fontSize:16,
   	fontWeight:'500'
   },
@@ -396,7 +396,7 @@ const styles = StyleSheet.create({
   button: {
     width:178,
     height:49,
-    backgroundColor:'rgba(66, 70, 153, 0.7)',
+    backgroundColor:'#2E305F',
      borderRadius: 8,
       marginVertical: 10,
       paddingVertical: 13
@@ -404,7 +404,8 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize:16,
     fontWeight:'500',
-    color:'#000000',
+    color:'#fff',
+    opacity:0.8,
     textAlign:'center'
   },textContainer0:{
     marginTop:55,

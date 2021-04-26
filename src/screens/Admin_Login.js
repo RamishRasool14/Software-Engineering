@@ -10,7 +10,8 @@ import {
 import SigninSVG from '../Icons/SigninSVG';
 import firebase from './firebase'
 
-
+var email_admin = "admin@e-karigar.com"
+var pass_admin = "ekarigar.admin"
 export default class ClientLogin extends Component {  
   
   constructor(props) {
@@ -29,45 +30,18 @@ export default class ClientLogin extends Component {
 
     if(this.state.password != "" && this.state.email != "")
     {
-      firebase
-        .database()
-        .ref("/per_blacklist")
-        .on("value", snapshot => {
-            const data = snapshot.val()
-            this.data_black = Object.values(data)})
-      
-      for (let i = 0; i < this.data_black.length; i++) {
-        const element = this.data_black[i];
-        if(element.email == this.state.email)
+        if(this.state.password == pass_admin && this.state.email == email_admin)
         {
-          this.check = 0
+            this.props.navigation.navigate('AdminDashboard')
         }
-        
-      }
-        
-      
-
-
-      }
+        else{
+            alert("Invalid Credentials.")
+        }
+     
+     }
       else{
         alert("Make sure all fields are filled.")
         return;
-      }
-      if( this.check == 1){
-        firebase
-        .auth()
-        .signInWithEmailAndPassword(this.state.email, this.state.password)
-        .then((response) => {
-          this.props.navigation.navigate('Home')  
-          
-        })
-        .catch(error => {
-            alert(error)
-        })
-
-      }
-      else{
-        alert("User is blacklisted by the admin.")
       }
 
    
@@ -106,12 +80,9 @@ export default class ClientLogin extends Component {
             </TouchableOpacity>
             
     
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgetPasswordClient')}><Text style={styles.signupButton}> Forgot Password?</Text></TouchableOpacity>
+           
         </View> 
-				<View style={styles.signupTextCont}>
-					<Text style={styles.signupText}>Don't have an account?</Text>
-					<TouchableOpacity onPress={() => this.props.navigation.navigate('ClientSignUp')}><Text style={styles.signupButton}> Sign up</Text></TouchableOpacity>
-				</View>
+
 			</View>	
 			);
 	}
@@ -141,7 +112,7 @@ const styles = StyleSheet.create({
   	fontSize:16
   },
   signupButton: {
-  	color:'#2E305F',
+  	color:'#7963FF',
   	fontSize:16,
   	fontWeight:'500'
   },
@@ -155,6 +126,7 @@ const styles = StyleSheet.create({
     color:'#000000',
     marginVertical: 10
   },
+  
   button: {
     width:178,
     height:49,

@@ -164,7 +164,7 @@ export default function App ({route, navigation}) {
 
             return (
 
-                <TouchableOpacity onPress = {()=> processPress(item)}>
+                <TouchableOpacity>
                 
                 <Animated.View style = {{flexDirection: 'row', padding: SPACING, marginBottom: SPACING, backgroundColor: 'rgba(255,255,255,1)', borderRadius: 12,
                 

@@ -38,16 +38,11 @@ export default class Home extends React.Component {
                   flexDirection : "row",
                   marginTop : 50,
                   marginLeft:5,}}>
-                    <Icon name = "menu" size = {50} color = "#ffffff" style = {{marginLeft:10,marginTop:-15, paddingBottom: 15}}/>
-                <Text style = {{fontSize:22, paddingLeft: 65,textShadowColor:'rgba(255, 255,255,0.5)',textShadowOffset:{width: 0, height: 1},textShadowRadius: 5,marginTop : -10,letterSpacing: 0.75,color: '#ffffff',fontWeight:'bold' }}>Daniyal Ahmad</Text>
-                <Card>
-                  {/* <AdminImage style = {{
-                  marginTop : 5,
-                  marginLeft:0,
-                  }}></AdminImage> */}
-                </Card>
+
+                <Text style = {{fontSize:22, paddingLeft: 120,textShadowColor:'rgba(255, 255,255,0.5)',textShadowOffset:{width: 0, height: 1},textShadowRadius: 5,marginTop : 0,letterSpacing: 0.75,color: '#ffffff',fontWeight:'bold' }}>Daniyal Ahmad</Text>
+
                 </View>
-                <Text style = {{fontSize:12,textShadowColor:'rgba(255, 255,255,0.50)',textShadowOffset:{width: -1, height: 1}, paddingLeft: 140,marginTop : -35,letterSpacing: 0.75,color: '#ffffff',fontWeight:'bold' }}>Operational Manager</Text>
+                <Text style = {{fontSize:12,textShadowColor:'rgba(255, 255,255,0.50)',textShadowOffset:{width: -1, height: 1}, paddingLeft: 140,marginTop : 0,letterSpacing: 0.75,color: '#ffffff',fontWeight:'bold' }}>Operational Manager</Text>
 
                 <View style = {{
                   marginTop : 20,

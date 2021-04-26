@@ -22,12 +22,12 @@ function SvgComponent(props) {
         <Path
           opacity={0.2}
           d="M138.249 0H11.924v116.964h126.325V0z"
-          fill="#6C63FF"
+          fill="#2E305F"
         />
         <Path
           opacity={0.5}
           d="M119.067 10.92H30.933v95.284h88.134V10.92z"
-          fill="#6C63FF"
+          fill="#2E305F"
         />
         <Path
           d="M150 16.8h-47.177v84.004H150V16.801z"
@@ -39,7 +39,7 @@ function SvgComponent(props) {
         />
         <Path
           d="M148.445 18.08h-44.067v80.964h44.067V18.08zM1.555 99.044h44.067V18.08H1.555v80.963z"
-          fill="#6C63FF"
+          fill="#2E305F"
         />
         <Path
           d="M38.364 25.441H8.814v4.96h29.55v-4.96z"
@@ -118,12 +118,12 @@ function SvgComponent(props) {
           d="M127.016 103.204H22.811v6.08h104.205v-6.08z"
           fill="url(#prefix__paint18_linear)"
         />
-        <Path d="M126.325 103.844H23.675v4.8h102.65v-4.8z" fill="#6C63FF" />
+        <Path d="M126.325 103.844H23.675v4.8h102.65v-4.8z" fill="#2E305F" />
         <Path
           d="M127.189 8H23.157v6.24h104.032V8z"
           fill="url(#prefix__paint19_linear)"
         />
-        <Path d="M126.325 8.48H23.675v4.8h102.65v-4.8z" fill="#6C63FF" />
+        <Path d="M126.325 8.48H23.675v4.8h102.65v-4.8z" fill="#2E305F" />
         <Path
           opacity={0.5}
           d="M100.403 18.08h-50.46v80.964h50.46V18.08z"
