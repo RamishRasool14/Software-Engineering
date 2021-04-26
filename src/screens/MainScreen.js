@@ -24,7 +24,6 @@ export default class MainScreen extends Component {
                 <Text style = {{fontSize:13, paddingLeft: 30,textShadowColor:'rgba(255, 255,255,0.5)',textAlign:'center',textShadowOffset:{width: 0, height: 1},textShadowRadius: 5,marginTop : 0,letterSpacing: 0.75,color: '#000000' }}>Connecting Customers and Service</Text>
                 <Text style = {{fontSize:13, paddingLeft: 30,textShadowColor:'rgba(255, 255,255,0.5)',textAlign:'center',textShadowOffset:{width: 0, height: 1},textShadowRadius: 5,marginTop : 0,letterSpacing: 0.75,color: '#000000' }}>Providers</Text>
 				<View style = {{marginLeft:-50,marginTop: 45}}>
-                <Text style = {{fontSize:13, paddingLeft: 0,textShadowColor:'rgba(255, 255,255,0.5)',textShadowOffset:{width: 0, height: 1},textShadowRadius: 5,marginTop : 0,letterSpacing: 0.75,color: '#000000' }}>Choose your category:</Text>
 				
                 </View>
                 
@@ -54,7 +53,7 @@ export default class MainScreen extends Component {
 
 
                <TouchableOpacity onPress = {() => this.props.navigation.navigate('AdminDashboard')}>
-                  <Text style = {{fontSize:18, paddingLeft: 50,textShadowColor:'rgba(255, 255,255,0.5)',textShadowOffset:{width: 0, height: 1},textShadowRadius: 5,marginTop : 25,letterSpacing: 0.75,color: '#000000',fontWeight: 'bold' }}>Admin Dashboard</Text>                    
+                  <Text style = {{fontSize:18, paddingLeft: 70,textShadowColor:'rgba(255, 255,255,0.5)',textShadowOffset:{width: 0, height: 1},textShadowRadius: 5,marginTop : 25,letterSpacing: 0.75,color: '#000000',fontWeight: 'bold'}}>Admin Dashboard</Text>                    
                 
                 </TouchableOpacity>
                   </View>
