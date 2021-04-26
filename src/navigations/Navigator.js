@@ -18,7 +18,8 @@ import  ClientSignUp from '../screens/ClientSignup'
 import  ClientLogin from '../screens/ClientLogin'
 import  SPLogin from '../screens/ServicePLogin'
 import  SPSignUP from '../screens/ServicePSignup'
-import ForgetPassword from '../screens/ForgetPassword'
+import ForgetPasswordClient from '../screens/ForgetPassword_client'
+import ForgetPasswordSP from '../screens/ForgetPassword_sp'
 import SPHome from "../screens/Service_Provider_Dashboard";
 import SPCompleted from "../screens/Completed_Orders_List";
 import SPPending from "../screens/Pending_Orders_List";
@@ -106,7 +107,8 @@ return (
         <Stack.Screen name = "ClientLogin" component = {ClientLogin} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPLogin" component = {SPLogin} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPSignUP" component = {SPSignUP} options={{ headerShown: false }}/>
-        <Stack.Screen name = "ForgetPassword" component = {ForgetPassword} options={{ headerShown: false }}/>
+        <Stack.Screen name = "ForgetPasswordClient" component = {ForgetPasswordClient} options={{ headerShown: false }}/>
+        <Stack.Screen name = "ForgetPasswordSP" component = {ForgetPasswordSP} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPHome" component = {SPHome} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPCompleted" component = {SPCompleted} options={{
           title: 'Completed Orders',

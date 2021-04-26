@@ -34,6 +34,7 @@ constructor(props) {
 
     };
     this.data_black = []
+    this.check = 1
   }
 
   processPress (){
@@ -55,6 +56,8 @@ myfun(){
   this.state.colony != "" && this.state.SQ != ""&& 
   this.state.phonenumber != "" && this.state.securityanswer != ""  )
   {
+    if(this.state.password == this.state.confirmpassword)
+    {
 
     firebase
     .database()
@@ -65,32 +68,38 @@ myfun(){
   
   for (let i = 0; i < this.data_black.length; i++) {
     const element = this.data_black[i];
-    if(element.email != this.state.email)
+    if(element.email == this.state.email)
     {
-
-
- 
-  firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.state.email, this.state.password)
-          .then((response) => {
-            this.processPress()
-            this.props.navigation.navigate('ClientLogin')
-          })
-          .catch((error) => {
-              alert(error)
-      });
-    }
-    else
-    {
-      alert("User is blacklisted by the admin.")
-      return;
+      this.check = 0
     }
   }
+}
+else{
+  alert("Passwords do not match.")
+  return;
+}
 }
     else{
       alert("Make sure all the fields are filled.")
       return;
+    }
+
+    if (this.check == 1)
+    {
+      firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then((response) => {
+        this.processPress()
+        
+        this.props.navigation.navigate('ClientLogin')
+      })
+      .catch((error) => {
+          alert(error)
+  });
+    }
+    else{
+      alert("Person is blacklisted by the admin")
     }
 
 }

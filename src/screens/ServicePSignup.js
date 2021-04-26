@@ -35,6 +35,8 @@ constructor(props) {
 
 
     };
+    this.data_black = []
+    this.check = 1
   }
 
   processPress (){
@@ -66,32 +68,32 @@ myfun(){
   
   for (let i = 0; i < this.data_black.length; i++) {
     const element = this.data_black[i];
-    if(element.email != this.state.email)
+    if(element.email == this.state.email)
     {
+      this.check = 1
 
-
- 
-  firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.state.email, this.state.password)
-          .then((response) => {
-            this.processPress()
-            this.props.navigation.navigate('SPLogin')
-          })
-          .catch((error) => {
-              alert(error)
-      });
-    }
-    else
-    {
-      alert("User is blacklisted by the admin.")
-      return;
     }
   }
 }
     else{
       alert("Make sure all the fileds are filled.")
       return;
+    }
+    if(this.check == 1){
+      firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then((response) => {
+        this.processPress()
+        this.props.navigation.navigate('SPLogin')
+      })
+      .catch((error) => {
+          alert(error)
+  });
+
+    }
+    else{
+      alert("User is blacklisted by the admin.")
     }
 
 

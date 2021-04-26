@@ -22,6 +22,7 @@ export default class ClientLogin extends Component {
 
     };
     this.data_black = []
+    this.check = 1
   }
   actionsfun()
   {
@@ -37,22 +38,9 @@ export default class ClientLogin extends Component {
       
       for (let i = 0; i < this.data_black.length; i++) {
         const element = this.data_black[i];
-        if(element.email != this.state.email)
+        if(element.email == this.state.email)
         {
-          firebase
-          .auth()
-          .signInWithEmailAndPassword(this.state.email, this.state.password)
-          .then((response) => {
-            this.props.navigation.navigate('Home')  
-            
-          })
-          .catch(error => {
-              alert(error)
-          })
-        }
-        else{
-          alert("User is blacklisted by the admin.")
-          return;
+          this.check = 0
         }
         
       }
@@ -64,6 +52,22 @@ export default class ClientLogin extends Component {
       else{
         alert("Make sure all fields are filled.")
         return;
+      }
+      if( this.check == 1){
+        firebase
+        .auth()
+        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then((response) => {
+          this.props.navigation.navigate('Home')  
+          
+        })
+        .catch(error => {
+            alert(error)
+        })
+
+      }
+      else{
+        alert("User is blacklisted by the admin.")
       }
 
    
@@ -102,7 +106,7 @@ export default class ClientLogin extends Component {
             </TouchableOpacity>
             
     
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgetPassword')}><Text style={styles.signupButton}> Forgot Password?</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgetPasswordClient')}><Text style={styles.signupButton}> Forgot Password?</Text></TouchableOpacity>
         </View> 
 				<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Don't have an account?</Text>
