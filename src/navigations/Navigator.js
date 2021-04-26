@@ -18,7 +18,8 @@ import  ClientSignUp from '../screens/ClientSignup'
 import  ClientLogin from '../screens/ClientLogin'
 import  SPLogin from '../screens/ServicePLogin'
 import  SPSignUP from '../screens/ServicePSignup'
-import ForgetPassword from '../screens/ForgetPassword'
+import ForgetPasswordClient from '../screens/ForgetPassword_client'
+import ForgetPasswordSP from '../screens/ForgetPassword_sp'
 import SPHome from "../screens/Service_Provider_Dashboard";
 import SPCompleted from "../screens/Completed_Orders_List";
 import SPPending from "../screens/Pending_Orders_List";
@@ -33,10 +34,14 @@ import SPPendingOrderDetails from "../screens/ViewPendingOrderDetail"
 import SPInProgressOrderDetail from "../screens/InProgressOrderDetail"
 import SPReview from "../screens/SP_Review"
 import SPCompletedDetail from "../screens/SPCompletedOrderDetails"
+import ConfirmPassClient from "../screens/confirmpassword_clients"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ChatScreen from "../screens/ChatScreen"
 import Inbox from "../screens/Inbox"
 import ClientInbox from "../screens/ClientInbox"
+
+
+import BlacklistDetails from "../screens/Blacklist_accept"
 
 const Stack = createStackNavigator()
 const InboxNavigator = createStackNavigator()
@@ -217,8 +222,15 @@ return (
         <Stack.Screen name = "ClientLogin" component = {ClientLogin} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPLogin" component = {SPLogin} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPSignUP" component = {SPSignUP} options={{ headerShown: false }}/>
+<<<<<<< HEAD
         <Stack.Screen name = "ForgetPassword" component = {ForgetPassword} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPHome" component = {SPHomeTabs} options={{ headerShown: false }}/>
+=======
+        <Stack.Screen name = "ForgetPasswordClient" component = {ForgetPasswordClient} options={{ headerShown: false }}/>
+        <Stack.Screen name = "ForgetPasswordSP" component = {ForgetPasswordSP} options={{ headerShown: false }}/>
+        <Stack.Screen name = "SPHome" component = {SPHome} options={{ headerShown: false }}/>
+        <Stack.Screen name = "ConfirmPassClient" component = {ConfirmPassClient} options={{ headerShown: false }}/>
+>>>>>>> 3fe943f2c7fa760a739b517d73d4115e4ffc35b0
         <Stack.Screen name = "SPCompleted" component = {SPCompleted} options={{
           title: 'Completed Orders',
           headerStyle: {
@@ -301,6 +313,7 @@ return (
         <Stack.Screen name = "BlacklistClients" component = {BlacklistClients} options={{ headerShown: false }}/>
         <Stack.Screen name = "ServiceProvidersList" component = {ServiceProvidersList} options={{ headerShown: false }}/>
         <Stack.Screen name = "ClientsList" component = {ClientsList} options={{ headerShown: false }}/>
+        <Stack.Screen name = "BlacklistDetails" component = {BlacklistDetails} options={{ headerShown: false }}/>
         
 
 

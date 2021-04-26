@@ -11,7 +11,7 @@ import {
   Alert
 } from 'react-native';
 import SignupSVG from '../Icons/SignupSVG'
-import {Picker} from '@react-native-community/picker';
+import {Picker} from '@react-native-picker/picker';
 import "firebase/firestore";
 
 import firebase from "./firebase";
@@ -35,6 +35,8 @@ constructor(props) {
 
 
     };
+    this.data_black = []
+    this.check = 1
   }
 
   processPress (){
@@ -50,16 +52,49 @@ constructor(props) {
 myfun(){
  
 
-  firebase
-          .auth()
-          .createUserWithEmailAndPassword(this.state.email, this.state.password)
-          .then((response) => {
-            this.processPress()
-            this.props.navigation.navigate('SPLogin')
-          })
-          .catch((error) => {
-              alert(error)
-      });
+  if (this.state.password != "" && this.state.confirmpassword != "" && 
+  this.state.email != "" && this.state.city != "" &&
+  this.state.province != "" && this.state.username != "" && 
+  this.state.colony != "" && this.state.SQ != ""&& 
+  this.state.phonenumber != "" && this.state.securityanswer != "" && this.state.hourlyRate != "")
+  {
+
+    firebase
+    .database()
+    .ref("/per_blacklist")
+    .on("value", snapshot => {
+        const data = snapshot.val()
+        this.data_black = Object.values(data)})
+  
+  for (let i = 0; i < this.data_black.length; i++) {
+    const element = this.data_black[i];
+    if(element.email == this.state.email)
+    {
+      this.check = 1
+
+    }
+  }
+}
+    else{
+      alert("Make sure all the fileds are filled.")
+      return;
+    }
+    if(this.check == 1){
+      firebase
+      .auth()
+      .createUserWithEmailAndPassword(this.state.email, this.state.password)
+      .then((response) => {
+        this.processPress()
+        this.props.navigation.navigate('SPLogin')
+      })
+      .catch((error) => {
+          alert(error)
+  });
+
+    }
+    else{
+      alert("User is blacklisted by the admin.")
+    }
 
 
 
@@ -133,13 +168,13 @@ myfun(){
               <View style = {styles.inputBox6}>
 
               <Picker style = {styles.picker2}
-              selectedValue={this.state.workCategory}
+              selectedValue={this.state.colony}
 
               onValueChange={(itemValue, itemIndex) => { 
                 if (!itemValue) {
                 return;
               } 
-                this.setState({ colony: itemValue })}} >
+                this.setState({ workCategory: itemValue })}} >
                   <Picker.Item label="Select Work Category" value="" />
                   <Picker.Item label="Electrician" value="Electrician" />
                   <Picker.Item label="Plumber" value="Plumber" />
@@ -217,7 +252,6 @@ myfun(){
               } 
                 this.setState({ SQ: itemValue })}}>
                   <Picker.Item label="Select a Security Question..." value="" />
-                  <Picker.Item label=" Your nick name?" value="Your nick name?" />
                   <Picker.Item label="Your pet's name?" value="Your pet's name?" />
               </Picker>
               </View>

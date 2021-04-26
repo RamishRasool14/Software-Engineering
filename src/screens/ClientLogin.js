@@ -21,20 +21,55 @@ export default class ClientLogin extends Component {
 
 
     };
+    this.data_black = []
+    this.check = 1
   }
   actionsfun()
   {
 
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then((response) => {
-        this.props.navigation.navigate('Home')  
-         
-      })
-      .catch(error => {
-          alert(error)
-      })
+    if(this.state.password != "" && this.state.email != "")
+    {
+      firebase
+        .database()
+        .ref("/per_blacklist")
+        .on("value", snapshot => {
+            const data = snapshot.val()
+            this.data_black = Object.values(data)})
+      
+      for (let i = 0; i < this.data_black.length; i++) {
+        const element = this.data_black[i];
+        if(element.email == this.state.email)
+        {
+          this.check = 0
+        }
+        
+      }
+        
+      
+
+
+      }
+      else{
+        alert("Make sure all fields are filled.")
+        return;
+      }
+      if( this.check == 1){
+        firebase
+        .auth()
+        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .then((response) => {
+          this.props.navigation.navigate('Home')  
+          
+        })
+        .catch(error => {
+            alert(error)
+        })
+
+      }
+      else{
+        alert("User is blacklisted by the admin.")
+      }
+
    
   }
 
@@ -71,7 +106,7 @@ export default class ClientLogin extends Component {
             </TouchableOpacity>
             
     
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgetPassword')}><Text style={styles.signupButton}> Forgot Password?</Text></TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('ForgetPasswordClient')}><Text style={styles.signupButton}> Forgot Password?</Text></TouchableOpacity>
         </View> 
 				<View style={styles.signupTextCont}>
 					<Text style={styles.signupText}>Don't have an account?</Text>
