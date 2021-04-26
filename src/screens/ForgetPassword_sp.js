@@ -22,36 +22,75 @@ export default class ForgetPassword extends Component {
     this.state = {
       email: "",
       question : "",
-      answer : ""
+      answer : "",
+      test :"hello"
     
     };
+    this.AllEmails = []
+    this.DATA_RETREIVED = ""
+    this.check_email = 0
+
   }
+//   processPress = (object) => {
+
+//     // const data = route.params
+//     // data ['chosenSP'] = object
+//     console.log(object)
+
+//     this.props.navigation.navigate('ConfirmPassClient')
+
+// }
 
 
   fetchData = () => {
-    firebase
-        .database()
-        .ref("/service_providers")
-        .on("value", snapshot => {
-            const data = snapshot.val()
-            const DATA_RETREIVED = Object.values(data)
-            const AllEmails = []
-            for (let index = 0; index < DATA_RETREIVED.length; index++) {
-              const unit = DATA_RETREIVED[index];
-              AllEmails.push(unit.email)
-              
-            }
-            console.log(AllEmails)
-    })
+      
+            firebase
+                .database()
+                .ref("/service_providers")
+                .on("value", snapshot => {
+                    const data = snapshot.val()
+                    this.DATA_RETREIVED = Object.values(data)
+            })
+
+
   
   }
       
   
   myfun(){
-    console.log(this.state.email)
-    console.log(this.state.answer)
-    console.log(this.state.question)
-    this.fetchData()
+      if(this.state.email != "" && this.state.answer != ""){
+        this.fetchData()
+        for (let x = 0; x < this.DATA_RETREIVED.length; x++) {
+            const element = this.DATA_RETREIVED[x];
+            if(element.email == this.state.email )
+            {
+                this.check_email = 1
+                if(this.state.answer == element.securityanswer)
+                {
+                    // alert('Valid Credentials')
+                    this.props.navigation.navigate('ConfirmPassClient')
+                    return
+                }
+                else{
+                    alert('Invalid Answer.')
+                }
+            }
+            
+        }
+        if(this.check_email == 0)
+        {
+          alert("Email not found in database.")
+        }
+      }
+      else{
+          console.log(this.state.email)
+          console.log(this.state.answer)
+          console.log(this.state.question)
+          alert("Make sure all the fields are filled.")
+
+      }
+
+
 }
 
 
@@ -83,7 +122,7 @@ export default class ForgetPassword extends Component {
 
               <View style = {styles.inputBox6}>
               <Picker style = {styles.picker2}
-                selectedValue={this.state.question}
+                selectedValue={this.state.answer}
 
                 onValueChange={(itemValue, itemIndex) => { 
                   if (!itemValue) {
@@ -91,7 +130,6 @@ export default class ForgetPassword extends Component {
                 } 
                   this.setState({ question: itemValue })}}
               >
-                  <Picker.Item label="Pick security Question" vlaue="" />
                   <Picker.Item label="Your pet's name?" vlaue="Your pet's name?" />
               </Picker>
               </View>

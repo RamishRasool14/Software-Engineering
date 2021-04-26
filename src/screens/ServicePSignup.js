@@ -168,13 +168,13 @@ myfun(){
               <View style = {styles.inputBox6}>
 
               <Picker style = {styles.picker2}
-              selectedValue={this.state.workCategory}
+              selectedValue={this.state.colony}
 
               onValueChange={(itemValue, itemIndex) => { 
                 if (!itemValue) {
                 return;
               } 
-                this.setState({ colony: itemValue })}} >
+                this.setState({ workCategory: itemValue })}} >
                   <Picker.Item label="Select Work Category" value="" />
                   <Picker.Item label="Electrician" value="Electrician" />
                   <Picker.Item label="Plumber" value="Plumber" />

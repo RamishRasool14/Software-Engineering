@@ -34,6 +34,7 @@ import SPPendingOrderDetails from "../screens/ViewPendingOrderDetail"
 import SPInProgressOrderDetail from "../screens/InProgressOrderDetail"
 import SPReview from "../screens/SP_Review"
 import SPCompletedDetail from "../screens/SPCompletedOrderDetails"
+import ConfirmPassClient from "../screens/confirmpassword_clients"
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 
@@ -110,6 +111,7 @@ return (
         <Stack.Screen name = "ForgetPasswordClient" component = {ForgetPasswordClient} options={{ headerShown: false }}/>
         <Stack.Screen name = "ForgetPasswordSP" component = {ForgetPasswordSP} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPHome" component = {SPHome} options={{ headerShown: false }}/>
+        <Stack.Screen name = "ConfirmPassClient" component = {ConfirmPassClient} options={{ headerShown: false }}/>
         <Stack.Screen name = "SPCompleted" component = {SPCompleted} options={{
           title: 'Completed Orders',
           headerStyle: {
