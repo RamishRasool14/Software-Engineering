@@ -69,7 +69,7 @@ const fetchData = () => {
       .on("value", snapshot => {
           if (snapshot.val()!=null){
 
-            const MessageKeys = Object.keys(snapshot.val())
+            // const MessageKeys = Object.keys(snapshot.val())
             const Messagecontents = Object.values(snapshot.val())
             let AllMessages = []
             Messagecontents.forEach(element => {

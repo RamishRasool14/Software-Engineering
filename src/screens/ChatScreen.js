@@ -18,6 +18,8 @@ const ChatScreen = ({route , navigation}) => {
       .ref("/Chat/Robert Williamson")
       .on("value", snapshot => {
 
+        if (snapshot.val()!=null){
+
             const MessageKeys = Object.keys(snapshot.val())
             const Messagecontents = Object.values(snapshot.val())
             
@@ -43,7 +45,7 @@ const ChatScreen = ({route , navigation}) => {
       console.log(FormattedMessages)
   
       setMessages(FormattedMessages.reverse());
-    
+    }
   })
 
   }, []);
